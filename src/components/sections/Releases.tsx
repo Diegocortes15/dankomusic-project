@@ -13,10 +13,7 @@ export function Releases() {
     <section id="releases" className="border-t border-steel/20 py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <p className="text-sm uppercase tracking-[0.3em] text-text-muted">{t("heading")}</p>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="mt-4 font-display text-4xl md:text-6xl">{t("heading")}</h2>
+          <h2 className="font-display text-4xl md:text-6xl">{t("heading")}</h2>
         </Reveal>
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {items.map((r) => (

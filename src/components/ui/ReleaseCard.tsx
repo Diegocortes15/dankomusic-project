@@ -19,8 +19,8 @@ export function ReleaseCard({ release }: Props) {
   ].filter(Boolean) as Array<{ href: string; label: string }>;
 
   return (
-    <article className="group bg-surface border border-steel/30">
-      <div className="relative aspect-square">
+    <article className="group bg-surface border border-steel/30 overflow-hidden">
+      <div className="relative aspect-square overflow-hidden">
         <Image
           src={release.artwork}
           alt={release.title}
