@@ -1,35 +1,60 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
-import { fadeUp, VIEWPORT_ONCE } from "@/lib/motion";
+import { useEffect, useRef } from "react";
+import type { CSSProperties, ElementType, ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
   className?: string;
-  as?: "div" | "section" | "article" | "header" | "footer";
+  as?: ElementType;
   delay?: number;
+  style?: CSSProperties;
+  href?: string;
+  target?: string;
+  rel?: string;
 };
 
-export function Reveal({ children, className, as = "div", delay = 0 }: Props) {
-  const reduce = useReducedMotion();
-  const MotionTag = motion[as];
+/**
+ * Scroll-triggered reveal. Adds `.is-revealed` once the element is ≥8% in view.
+ * One-shot. Animations + reduced-motion handling live in globals.css.
+ */
+export function Reveal({
+  children,
+  className = "",
+  as: Tag = "div",
+  delay = 0,
+  style,
+  ...rest
+}: Props) {
+  const ref = useRef<HTMLElement | null>(null);
 
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            el.classList.add("is-revealed");
+            obs.unobserve(el);
+          }
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -8% 0px" },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
+  const mergedStyle = {
+    ...(style ?? {}),
+    "--reveal-delay": `${delay}ms`,
+  } as CSSProperties;
+
+  const Component = Tag as ElementType;
   return (
-    <MotionTag
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={VIEWPORT_ONCE}
-      variants={fadeUp}
-      transition={{ delay }}
-    >
+    <Component ref={ref} className={`reveal ${className}`.trim()} style={mergedStyle} {...rest}>
       {children}
-    </MotionTag>
+    </Component>
   );
 }
