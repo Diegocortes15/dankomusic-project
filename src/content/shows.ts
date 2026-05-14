@@ -1,4 +1,5 @@
 import type { Show } from "./types";
+import { toLocalIsoDate } from "./util";
 
 export const shows: Show[] = [
   {
@@ -29,7 +30,7 @@ export function partitionShows(today: Date = new Date()): {
   upcoming: Show[];
   past: Show[];
 } {
-  const todayIso = today.toISOString().slice(0, 10);
+  const todayIso = toLocalIsoDate(today);
   const upcoming: Show[] = [];
   const past: Show[] = [];
   for (const s of shows) {

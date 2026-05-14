@@ -1,4 +1,5 @@
 import type { Release } from "./types";
+import { toLocalIsoDate } from "./util";
 
 export const releases: Release[] = [
   // Add releases here. Section auto-hides when no upcoming entries exist.
@@ -14,7 +15,7 @@ export const releases: Release[] = [
 ];
 
 export function upcomingReleases(today: Date = new Date()): Release[] {
-  const todayIso = today.toISOString().slice(0, 10);
+  const todayIso = toLocalIsoDate(today);
   return releases
     .filter((r) => r.releaseDate >= todayIso)
     .sort((a, b) => a.releaseDate.localeCompare(b.releaseDate));
