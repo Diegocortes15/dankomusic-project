@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "title": "DANKØ · Peak Time Techno · Bogotá",
+    "description": "DJ Danko. Peak Time Techno and Hard Trance from Bogotá, Colombia. Sets, upcoming releases, tour dates, and international booking.",
+    "ogAlt": "Danko behind the decks"
+  },
+  "nav": {
+    "bio": "Bio",
+    "music": "Music",
+    "releases": "Releases",
+    "shows": "Shows",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "booking": "Booking",
+    "switchLocale": "Switch language"
+  },
+  "hero": {
+    "eyebrow": "Peak Time Techno · Bogotá, CO",
+    "tagline": "140+ BPM · Hard Trance",
+    "cta": "Listen to latest set",
+    "cta2": "Upcoming shows",
+    "scroll": "Scroll"
+  },
+  "bio": {
+    "title": "Bio",
+    "lede": "Daniel Beltrán — Dankø — pushes the Bogotá scene to its limit with peak time techno sets at 140+ BPM. Moves between Hard Trance and Industrial without asking permission.",
+    "body1": "He started in Bogotá after-hours and now shares booths with artists from the Latin American hard trance scene. His signature: surgical transitions, kicks that cut, drops that don’t forgive.",
+    "body2": "Pioneer CDJ-3000 only. Two-hour sets. Available for bookings across Colombia and Europe.",
+    "stat1Label": "Avg BPM",
+    "stat2Label": "Sets this year",
+    "stat3Label": "Cities",
+    "stat4Label": "Based in"
+  },
+  "music": {
+    "title": "Music",
+    "lede": "Original tracks — techno, hard techno and trance — available on SoundCloud.",
+    "latest": "Latest release",
+    "plays": "plays",
+    "likes": "likes",
+    "playOnSC": "Play track",
+    "listenSC": "Open in SoundCloud →",
+    "viewAll": "View all tracks"
+  },
+  "releases": {
+    "title": "Releases",
+    "lede": "Upcoming releases. Pre-save so you don’t miss release day.",
+    "presave": "Pre-save"
+  },
+  "shows": {
+    "title": "Shows",
+    "lede": "Live calendar. Dates update weekly.",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "next": "Next",
+    "tickets": "Tickets →",
+    "soldout": "Sold out"
+  },
+  "gallery": {
+    "title": "Galería / Gallery",
+    "lede": "Booth. Floor. Festival. Photos by the scene."
+  },
+  "contact": {
+    "title": "Contacto / Contact",
+    "lede": "Bookings, press, collaborations. Reply within 48h.",
+    "directBooking": "Direct Booking",
+    "emailCta": "Email bookings@danko.dj",
+    "emailNote": "Direct email is best. You’ll get a reply within 48 business hours.",
+    "formDeferred": "A real form is coming soon — for now, please email.",
+    "direct": "Or on socials:",
+    "rate": "Reply · < 48h"
+  },
+  "footer": {
+    "tag": "Peak Time Techno · Hard Trance",
+    "rights": "© {year} Dankø. All rights reserved.",
+    "built": "Built in Bogotá"
+  }
+}

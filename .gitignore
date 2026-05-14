@@ -10,6 +10,8 @@ node_modules/
 
 # testing
 coverage/
+playwright-report/
+test-results/
 
 # next.js
 .next/
@@ -43,5 +45,7 @@ yarn-error.log*
 .vscode/
 .idea/
 
-# Claude Code local
+# Claude Code local (settings and plugin-installed skills)
 .claude/settings.local.json
+.claude/skills/
+skills-lock.json
