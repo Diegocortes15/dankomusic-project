@@ -28,25 +28,20 @@ export function LocaleSwitcher() {
   };
 
   return (
-    <div className="flex items-center gap-3 text-sm" aria-label={t("switchLocale")}>
-      {routing.locales.map((loc) => {
-        const active = loc === current;
-        return (
+    <div className="nav__lang" aria-label={t("switchLocale")}>
+      {routing.locales.map((loc, i) => (
+        <span key={loc} style={{ display: "contents" }}>
+          {i > 0 && <span aria-hidden="true">/</span>}
           <button
-            key={loc}
             type="button"
             onClick={() => switchTo(loc)}
-            aria-current={active ? "true" : undefined}
-            className={
-              active
-                ? "font-semibold text-text"
-                : "text-text-muted hover:text-text transition-colors"
-            }
+            aria-current={loc === current ? "true" : undefined}
+            className={loc === current ? "is-active" : ""}
           >
             {loc.toUpperCase()}
           </button>
-        );
-      })}
+        </span>
+      ))}
     </div>
   );
 }

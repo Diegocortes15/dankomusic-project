@@ -1,14 +1,15 @@
-# Danko — Website
+# Dankø — Website
 
-Bilingual (ES/EN) website for DJ Danko — Peak Time Techno · Bogotá.
+Bilingual (ES/EN) website for DJ Dankø — Peak Time Techno · Hard Trance · Bogotá.
 
 ## Stack
 
-- Next.js 15 (App Router) + TypeScript strict
-- Tailwind CSS v4 (CSS-first config in `src/app/globals.css`)
-- next-intl v4 — locales: `es` (default), `en`
-- framer-motion
-- Vitest + React Testing Library · Playwright
+- **Next.js 15** (App Router) + TypeScript strict
+- **Tailwind CSS v4** for layout utilities; brand styles live as semantic CSS in `src/app/globals.css`
+- **next-intl v4** — locales: `es` (default), `en`
+- **Anton / Oswald / Inter / JetBrains Mono** via `next/font/google`
+- Custom motion: CSS animations, IntersectionObserver-based `Reveal`, rAF-based parallax & cursor spotlight (no framer-motion runtime)
+- **Vitest + React Testing Library** for units · **Playwright** for E2E
 
 ## Develop
 
@@ -28,7 +29,7 @@ npm run typecheck    # tsc --noEmit
 npm run lint         # ESLint flat config
 ```
 
-Note: `test:e2e` uses `next build && next start` rather than `next dev` because Next 15.5 + React 19 cold-compilation under Playwright's parallel requests produces flaky React Client Manifest errors on the dev server. The trade-off is an ~80s build before the suite runs.
+`test:e2e` runs against `next build && next start` rather than `next dev` because Next 15.5 + React 19 cold-compilation under Playwright's parallel requests produces flaky React Client Manifest errors on the dev server. The trade-off is an ~80s build before the suite runs.
 
 ## Edit content
 
@@ -36,19 +37,22 @@ All content lives in `src/content/` and `src/i18n/messages/`:
 
 | File | What |
 |------|------|
-| `src/content/releases.ts` | Upcoming releases. Section auto-hides when empty. |
-| `src/content/shows.ts` | Shows. Auto-split into upcoming/past by date. |
-| `src/content/sets.ts` | SoundCloud sets. First entry is the featured set. |
-| `src/content/util.ts` | `toLocalIsoDate` — local-timezone date helper used by filters. |
+| `src/content/sets.ts` | SoundCloud track list. First entry is the featured card; the rest fill the grid. Includes profile URL constant. |
+| `src/content/shows.ts` | `upcomingShows` and `pastShows`. Each entry has `day`, `mon`, `venue`, `city`, `meta`, `status` (`tickets` / `soldout` / `tba`), optional `ticketUrl`. |
+| `src/content/releases.ts` | Upcoming releases. **Section + nav entry auto-hide when this array is empty.** |
+| `src/content/gallery.ts` | Photo mosaic. Supports `span: "wide" \| "tall"` for asymmetric tiles. |
+| `src/content/util.ts` | `toLocalIsoDate`, `formatTrackDate`, `formatLongDate` helpers. |
 | `src/i18n/messages/es.json` | Spanish UI strings + bio. |
 | `src/i18n/messages/en.json` | English UI strings + bio. |
 
-Proper names (venues, set titles, track names) are not translated — they live in the data files and appear verbatim in both locales.
+Proper names (venues, set titles, track names) are **not** translated — they live in the data files in their flyer-voice form and appear verbatim in both locales.
 
 ## Replace before launch
 
-- `BOOKING_EMAIL` constant in `src/components/sections/Contact.tsx` — set to the real booking address.
-- `NEXT_PUBLIC_SITE_URL` env var — set to the production domain (used by `sitemap.xml`, `robots.txt`, JSON-LD, and `metadataBase` for OG images).
+- `BOOKING_EMAIL` constant in `src/components/sections/Contact.tsx` (currently `bookings@danko.dj`) — set to the real booking inbox.
+- `NEXT_PUBLIC_SITE_URL` env var — set to the production domain. Used by `sitemap.xml`, `robots.txt`, JSON-LD, and `metadataBase` for OG image absolutising.
+- Upcoming `shows` data — the in-tree entries from Jun-Oct are placeholders inherited from the design kit. Replace with confirmed bookings before public launch.
+- `tracks` plays/likes — refreshed at design time. Treat as cosmetic; refresh occasionally from SoundCloud.
 
 ## Deploy
 
@@ -64,25 +68,26 @@ Vercel:
 ```
 src/
   app/
-    [locale]/         # bilingual routes
-      layout.tsx      # locale shell, fonts, metadata, JSON-LD
-      page.tsx        # single-page composition of all sections
+    [locale]/                # bilingual routes
+      layout.tsx             # locale shell, fonts, metadata, JSON-LD, BackgroundFX
+      page.tsx               # single-page composition of all sections
       not-found.tsx
-    layout.tsx        # root passthrough
-    not-found.tsx     # root 404 (paths without a locale prefix)
-    sitemap.ts        # /sitemap.xml
-    robots.ts         # /robots.txt
-    globals.css       # Tailwind v4 + design tokens
+    layout.tsx               # root passthrough
+    not-found.tsx            # root 404 (paths without a locale prefix)
+    sitemap.ts               # /sitemap.xml
+    robots.ts                # /robots.txt
+    globals.css              # Tailwind + design tokens + all section styles
   components/
-    nav/              # top nav + locale switcher
-    sections/         # one component per page section
-    ui/               # Reveal, SoundCloudEmbed, ReleaseCard, ShowItem
-  content/            # editable data + types
-  i18n/               # next-intl routing, request, messages
-  lib/                # fonts, motion variants, seo helpers
-  middleware.ts       # next-intl locale routing
-public/assets/        # brand photography
+    nav/                     # Nav + LocaleSwitcher
+    fx/                      # BackgroundFX (drift + cursor + grain)
+    sections/                # Hero, Bio, Music, Releases, Shows, Gallery, Contact, Footer
+    ui/                      # Reveal, Icon, Button, SectionStarter, Eyebrow
+  content/                   # editable data + types
+  i18n/                      # next-intl routing, request, messages
+  lib/                       # fonts (next/font), seo (JSON-LD), useParallax
+  middleware.ts              # next-intl locale routing
+public/assets/               # brand photography
 tests/
-  unit/               # Vitest specs
-  e2e/                # Playwright specs
+  unit/                      # Vitest specs
+  e2e/                       # Playwright specs
 ```

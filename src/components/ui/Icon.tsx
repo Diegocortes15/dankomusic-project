@@ -14,6 +14,7 @@ export type IconName =
   | "soundcloud"
   | "youtube"
   | "spotify"
+  | "apple"
   | "volume"
   | "clock"
   | "heart";
@@ -134,6 +135,14 @@ export function Icon({ name, size = 18, ...rest }: Props) {
           <path d="M7 9c3-1 8-1 11 1" />
           <path d="M7 13c2.5-.8 6.5-.8 9 .8" />
           <path d="M8 16c2-.6 5-.6 7 .6" />
+        </svg>
+      );
+    case "apple":
+      return (
+        <svg {...common}>
+          <path d="M9 18V5l12-2v13" />
+          <circle cx="6" cy="18" r="3" />
+          <circle cx="18" cy="16" r="3" />
         </svg>
       );
     case "volume":

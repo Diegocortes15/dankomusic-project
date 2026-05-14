@@ -1,48 +1,112 @@
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Reveal } from "@/components/ui/Reveal";
-import { SoundCloudEmbed } from "@/components/ui/SoundCloudEmbed";
-import { featuredSet, moreSets } from "@/content/sets";
+import { SectionStarter } from "@/components/ui/SectionStarter";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
+import { SOUNDCLOUD_PROFILE, featuredTrack, moreTracks } from "@/content/sets";
+import { formatTrackDate } from "@/content/util";
+import type { Track } from "@/content/types";
+
+type SupportedLocale = "es" | "en";
+
+function FeaturedTrack({ track }: { track: Track }) {
+  const t = useTranslations("music");
+  const locale = useLocale() as SupportedLocale;
+  return (
+    <article className="music__featured">
+      <a
+        className="music__featured-art"
+        href={track.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ backgroundImage: `url(${track.art})` }}
+      >
+        <div className="music__featured-play" aria-hidden="true">
+          <Icon name="play" size={28} />
+        </div>
+      </a>
+      <div className="music__featured-meta">
+        <Eyebrow style={{ marginBottom: 14 }}>
+          {t("latest")} · {formatTrackDate(track.date, locale)}
+        </Eyebrow>
+        <h2 className="music__featured-title">{track.title}</h2>
+        <div className="music__featured-sub mono">
+          {track.tag.toUpperCase()} · {track.plays.toLocaleString()} {t("plays")} · {track.likes}{" "}
+          {t("likes")}
+        </div>
+        <div className="music__featured-cta">
+          <Button variant="primary" href={track.url}>
+            <Icon name="play" size={16} /> {t("playOnSC")}
+          </Button>
+          <Button variant="ghost" href={SOUNDCLOUD_PROFILE}>
+            <Icon name="soundcloud" size={16} /> {t("listenSC")}
+          </Button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function TrackCard({ track }: { track: Track }) {
+  const locale = useLocale() as SupportedLocale;
+  return (
+    <a className="track-card" href={track.url} target="_blank" rel="noopener noreferrer">
+      <div className="track-card__art" style={{ backgroundImage: `url(${track.art})` }}>
+        <div className="track-card__play" aria-hidden="true">
+          <Icon name="play" size={18} />
+        </div>
+        <div className="track-card__tag mono">{track.tag.toUpperCase()}</div>
+      </div>
+      <div className="track-card__meta">
+        <div className="track-card__date mono">{formatTrackDate(track.date, locale)}</div>
+        <h3 className="track-card__title">{track.title}</h3>
+        <div className="track-card__stats mono">
+          <span>
+            <Icon name="play" size={11} /> {track.plays.toLocaleString()}
+          </span>
+          <span>
+            <Icon name="heart" size={11} /> {track.likes}
+          </span>
+        </div>
+      </div>
+    </a>
+  );
+}
 
 export function Music() {
   const t = useTranslations("music");
 
   return (
-    <section id="music" className="border-t border-steel/20 py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal>
-          <p className="text-sm uppercase tracking-[0.3em] text-text-muted">{t("heading")}</p>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="mt-4 font-display text-4xl md:text-6xl">{t("featured")}</h2>
-        </Reveal>
+    <section id="music" className="section section--dark music">
+      <Reveal>
+        <SectionStarter num={2} total={6} title={t("title")} lede={t("lede")} />
+      </Reveal>
 
-        {featuredSet ? (
-          <Reveal delay={0.1}>
-            <div className="mt-10">
-              <SoundCloudEmbed
-                url={featuredSet.soundcloudUrl}
-                title={featuredSet.title}
-                size="lg"
-              />
-            </div>
+      {featuredTrack ? (
+        <Reveal delay={100}>
+          <FeaturedTrack track={featuredTrack} />
+        </Reveal>
+      ) : null}
+
+      <div className="music__grid">
+        {moreTracks.map((track, i) => (
+          <Reveal key={track.id} delay={i * 80}>
+            <TrackCard track={track} />
           </Reveal>
-        ) : null}
-
-        {moreSets.length > 0 && (
-          <div className="mt-20">
-            <Reveal>
-              <h3 className="font-display text-2xl text-text-muted">{t("more")}</h3>
-            </Reveal>
-            <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {moreSets.map((s) => (
-                <Reveal key={s.soundcloudUrl}>
-                  <SoundCloudEmbed url={s.soundcloudUrl} title={s.title} />
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        )}
+        ))}
       </div>
+
+      <Reveal delay={200} className="music__viewall">
+        <a
+          className="music__viewall-link"
+          href={SOUNDCLOUD_PROFILE}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t("viewAll")} <Icon name="arrow-up-right" size={16} />
+        </a>
+      </Reveal>
     </section>
   );
 }

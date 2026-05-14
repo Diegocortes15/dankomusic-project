@@ -1,59 +1,59 @@
 import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/ui/Reveal";
+import { SectionStarter } from "@/components/ui/SectionStarter";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 
-const BOOKING_EMAIL = "booking@dankomusic.com"; // placeholder — replace with real email
-const INSTAGRAM_URL = "https://www.instagram.com/danko_d.j/";
-const SOUNDCLOUD_URL = "https://soundcloud.com/daniel-beltran-101291848";
+const BOOKING_EMAIL = "bookings@danko.dj";
+const INSTAGRAM_URL = "https://instagram.com/danko_d.j";
+const INSTAGRAM_HANDLE = "@danko_d.j";
+const SOUNDCLOUD_URL = "https://soundcloud.com/daniel-beltran-101291848/tracks";
 
 export function Contact() {
   const t = useTranslations("contact");
+  const mailto = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent("[Booking] Dankø")}`;
 
   return (
-    <section id="contact" className="border-t border-steel/20 py-24 md:py-32">
-      <div className="mx-auto max-w-4xl px-6 text-center">
-        <Reveal>
-          <h2 className="font-display text-5xl md:text-7xl">{t("heading")}</h2>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <p className="mt-8 text-text-muted">{t("bookingLead")}</p>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <a
-            href={`mailto:${BOOKING_EMAIL}`}
-            className="mt-6 inline-block border border-silver px-8 py-4 font-display text-xl uppercase tracking-widest hover:bg-silver hover:text-base transition-colors"
-            aria-label={t("emailLabel")}
-          >
+    <section id="contact" className="section contact">
+      <Reveal>
+        <SectionStarter num={6} total={6} title={t("title")} lede={t("lede")} />
+      </Reveal>
+
+      <div className="contact__hero">
+        <Reveal delay={120} className="contact__hero-meta">
+          <Eyebrow>{t("directBooking")}</Eyebrow>
+          <a className="contact__email-display mono" href={mailto}>
             {BOOKING_EMAIL}
           </a>
+          <p className="contact__hero-note">{t("emailNote")}</p>
+          <Button variant="primary" href={mailto}>
+            <Icon name="mail" size={16} /> {t("emailCta")}
+          </Button>
+          <div className="contact__deferred mono">{t("formDeferred")}</div>
         </Reveal>
-        <Reveal delay={0.15}>
-          <p className="mt-16 text-xs uppercase tracking-[0.3em] text-text-muted">
-            {t("follow")}
-          </p>
-        </Reveal>
-        <Reveal delay={0.2}>
-          <ul className="mt-4 flex justify-center gap-8 text-sm">
+
+        <Reveal as="aside" delay={200} className="contact__direct">
+          <Eyebrow style={{ marginBottom: 16 }}>{t("direct")}</Eyebrow>
+          <ul className="contact__channels">
             <li>
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-silver hover:text-text transition-colors"
-              >
-                Instagram
+              <Icon name="instagram" size={16} />
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
+                {INSTAGRAM_HANDLE}
               </a>
             </li>
             <li>
-              <a
-                href={SOUNDCLOUD_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-silver hover:text-text transition-colors"
-              >
-                SoundCloud
+              <Icon name="soundcloud" size={16} />
+              <a href={SOUNDCLOUD_URL} target="_blank" rel="noopener noreferrer">
+                soundcloud / danko
               </a>
+            </li>
+            <li>
+              <Icon name="map-pin" size={16} />
+              <span>Bogotá, CO · world-touring</span>
             </li>
           </ul>
+          <div className="contact__rate mono">{t("rate")}</div>
         </Reveal>
       </div>
     </section>

@@ -1,65 +1,86 @@
 "use client";
 
-import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import type { CSSProperties } from "react";
 import { useTranslations } from "next-intl";
-import { easeIndustrial } from "@/lib/motion";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
+import { useParallax } from "@/lib/useParallax";
+
+const NAV_OFFSET = 56;
+const LETTERS = ["D", "A", "N", "K", "Ø"];
+
+function smoothJump(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+  window.scrollTo({ top, behavior: "smooth" });
+}
 
 export function Hero() {
   const t = useTranslations("hero");
-  const reduce = useReducedMotion();
+  const photoRef = useRef<HTMLDivElement | null>(null);
+  useParallax(photoRef, 0.08);
 
   return (
-    <section id="hero" className="relative isolate flex min-h-screen items-center overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <Image
-          src="/assets/danko_radioberlin_club_1.jpeg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-50"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-base/60 via-base/40 to-base" />
+    <section id="top" className="hero">
+      <div className="hero__photo-wrap">
+        <div className="hero__photo" ref={photoRef} />
+      </div>
+      <div className="hero__protection" />
+      <div className="hero__glow" />
+
+      <div className="hero__content">
+        <Eyebrow>{t("eyebrow")}</Eyebrow>
+        <h1 className="hero__name" aria-label="Dankø">
+          {LETTERS.map((ch, i) => (
+            <span
+              key={`${ch}-${i}`}
+              className={`hero__name__char${ch === "Ø" ? " hero__o" : ""}`}
+              style={{ "--i": i } as CSSProperties}
+            >
+              {ch}
+            </span>
+          ))}
+        </h1>
+        <div className="hero__tag">{t("tagline")}</div>
+        <div className="hero__ctas">
+          <Button
+            variant="primary"
+            href="#music"
+            onClick={(e) => {
+              e.preventDefault();
+              smoothJump("music");
+            }}
+          >
+            <Icon name="play" size={16} />
+            {t("cta")}
+          </Button>
+          <Button
+            variant="ghost"
+            href="#shows"
+            onClick={(e) => {
+              e.preventDefault();
+              smoothJump("shows");
+            }}
+          >
+            {t("cta2")}
+            <Icon name="chevron-right" size={16} />
+          </Button>
+        </div>
       </div>
 
-      <div className="mx-auto w-full max-w-7xl px-6">
-        <motion.h1
-          initial={reduce ? false : { opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easeIndustrial }}
-          className="font-display text-[18vw] leading-[0.85] tracking-tight md:text-[12rem]"
-        >
-          DANKO
-        </motion.h1>
-        <motion.p
-          initial={reduce ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: easeIndustrial, delay: 0.2 }}
-          className="mt-6 max-w-xl text-lg uppercase tracking-[0.2em] text-text-muted"
-        >
-          {t("tagline")}
-        </motion.p>
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: easeIndustrial, delay: 0.35 }}
-          className="mt-10 flex flex-wrap gap-4"
-        >
-          <a
-            href="#music"
-            className="rounded-sm border border-silver px-6 py-3 text-sm font-medium uppercase tracking-widest hover:bg-silver hover:text-base transition-colors"
-          >
-            {t("ctaListen")}
-          </a>
-          <a
-            href="#contact"
-            className="rounded-sm border border-steel px-6 py-3 text-sm font-medium uppercase tracking-widest text-text-muted hover:text-text hover:border-silver transition-colors"
-          >
-            {t("ctaBook")}
-          </a>
-        </motion.div>
-      </div>
+      <button
+        className="hero__scroll"
+        onClick={() => smoothJump("bio")}
+        aria-label={t("scroll")}
+      >
+        <span>{t("scroll")}</span>
+        <Icon name="arrow-down" size={14} />
+      </button>
+      <div className="hero__corner hero__corner--tl">DK · 01</div>
+      <div className="hero__corner hero__corner--br">140 BPM</div>
     </section>
   );
 }

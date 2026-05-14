@@ -1,49 +1,106 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { hasUpcomingReleases } from "@/content/releases";
 
+type SectionId = "top" | "bio" | "music" | "releases" | "shows" | "gallery" | "contact";
+
+const SCROLL_THRESHOLD = 60;
+const NAV_OFFSET = 56;
+
 export function Nav() {
   const t = useTranslations("nav");
   const showReleases = hasUpcomingReleases();
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState<SectionId>("bio");
 
-  const links: Array<{ href: string; label: string }> = [
-    { href: "#about", label: t("bio") },
-    { href: "#music", label: t("music") },
-    ...(showReleases ? [{ href: "#releases", label: t("releases") }] : []),
-    { href: "#shows", label: t("shows") },
-    { href: "#gallery", label: t("gallery") },
-    { href: "#contact", label: t("contact") },
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const ids: SectionId[] = ["top", "bio", "music", "releases", "shows", "gallery", "contact"];
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const id = entry.target.id as SectionId;
+            setActive(id === "top" ? "bio" : id);
+          }
+        }
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
+    );
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (el) obs.observe(el);
+    }
+    return () => obs.disconnect();
+  }, []);
+
+  const onJump = (e: React.MouseEvent, id: SectionId) => {
+    e.preventDefault();
+    if (id === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const el = document.getElementById(id);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
+  const links: Array<{ id: SectionId; label: string }> = [
+    { id: "bio", label: t("bio") },
+    { id: "music", label: t("music") },
+    ...(showReleases ? ([{ id: "releases" as const, label: t("releases") }]) : []),
+    { id: "shows", label: t("shows") },
+    { id: "gallery", label: t("gallery") },
+    { id: "contact", label: t("contact") },
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-md bg-base/70 border-b border-steel/30">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="#hero" className="flex items-center gap-3">
-          <Image
-            src="/assets/danko_logo.jpeg"
-            alt="Danko"
-            width={32}
-            height={32}
-            className="rounded-sm"
-          />
-          <span className="font-display text-lg tracking-wide">DANKO</span>
-        </a>
-
-        <ul className="hidden gap-6 text-sm text-text-muted md:flex">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a href={l.href} className="hover:text-text transition-colors">
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <LocaleSwitcher />
-      </nav>
-    </header>
+    <nav className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
+      <a
+        className="nav__logo"
+        href="#top"
+        onClick={(e) => onJump(e, "top")}
+        aria-label="Dankø home"
+      >
+        <Image
+          src="/assets/danko_logo.jpeg"
+          alt=""
+          width={32}
+          height={32}
+          priority
+        />
+      </a>
+      <div className="nav__links">
+        {links.map((l) => (
+          <a
+            key={l.id}
+            href={`#${l.id}`}
+            className={`nav__link ${active === l.id ? "is-active" : ""}`}
+            onClick={(e) => onJump(e, l.id)}
+          >
+            {l.label}
+          </a>
+        ))}
+      </div>
+      <LocaleSwitcher />
+      <a
+        className="btn btn--primary nav__book"
+        href="#contact"
+        onClick={(e) => onJump(e, "contact")}
+      >
+        {t("booking")}
+      </a>
+    </nav>
   );
 }

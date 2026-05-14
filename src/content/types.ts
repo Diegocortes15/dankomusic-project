@@ -3,27 +3,45 @@ export type Release = {
   title: string;
   label?: string;
   releaseDate: string; // ISO date (YYYY-MM-DD)
-  artwork: string; // path under /public
-  links: {
-    spotify?: string;
-    beatport?: string;
-    apple?: string;
-    soundcloud?: string;
-  };
+  artwork: string;
+  presave: PresaveLink[];
+};
+
+export type PresaveLink = {
+  id: "spotify" | "beatport" | "apple" | "soundcloud";
+  label: string;
+  href: string;
 };
 
 export type Show = {
   id: string;
-  date: string; // ISO date (YYYY-MM-DD)
+  day: string; // "14"
+  mon: string; // "JUN"
   venue: string;
   city: string;
-  country: string;
-  eventName?: string;
+  meta: string;
+  status: "tickets" | "soldout" | "tba";
   ticketUrl?: string;
+  date?: string; // optional ISO for sorting; tools may compute from day/mon
 };
 
-export type SetEntry = {
-  soundcloudUrl: string;
+export type TrackTag = "Techno" | "Hard Techno" | "Trance";
+
+export type Track = {
+  id: string;
   title: string;
-  description?: string;
+  tag: TrackTag;
+  date: string; // ISO date (YYYY-MM-DD)
+  plays: number;
+  likes: number;
+  url: string;
+  art: string;
+  featured?: boolean;
+};
+
+export type GalleryShot = {
+  src: string;
+  cap: string;
+  meta: string;
+  span?: "wide" | "tall";
 };
