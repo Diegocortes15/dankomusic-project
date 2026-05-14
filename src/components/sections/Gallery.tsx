@@ -5,14 +5,14 @@ import { Reveal } from "@/components/ui/Reveal";
 type Photo = { src: string; alt: string; aspect: "square" | "tall" | "wide" };
 
 const photos: Photo[] = [
-  { src: "/assets/danko_radioberlin_club_1.jpeg", alt: "Radio Berlin Club, Bogotá", aspect: "wide" },
-  { src: "/assets/danko_mezclando_1.jpeg", alt: "Danko mixing", aspect: "tall" },
-  { src: "/assets/danko_b2b_brandon_1.jpeg", alt: "B2B with Brandon", aspect: "square" },
-  { src: "/assets/danko_core_medellin.jpeg", alt: "CORE Medellín", aspect: "wide" },
-  { src: "/assets/danko_radioberlin_club_2.jpeg", alt: "Radio Berlin Club crowd", aspect: "tall" },
-  { src: "/assets/danko_meaclando_2.jpeg", alt: "Danko mixing", aspect: "square" },
-  { src: "/assets/danko_b2b_brandon_2.jpeg", alt: "B2B with Brandon", aspect: "wide" },
-  { src: "/assets/danko_practice.jpeg", alt: "Practice session", aspect: "square" },
+  { src: "/assets/danko_radioberlin_club_1.jpeg", alt: "Radio Berlin Club, Bogotá — Danko in the booth", aspect: "wide" },
+  { src: "/assets/danko_mezclando_1.jpeg", alt: "Danko mixing — wide shot", aspect: "tall" },
+  { src: "/assets/danko_b2b_brandon_1.jpeg", alt: "B2B with Brandon — set one", aspect: "square" },
+  { src: "/assets/danko_core_medellin.jpeg", alt: "CORE Medellín — Danko on the decks", aspect: "wide" },
+  { src: "/assets/danko_radioberlin_club_2.jpeg", alt: "Radio Berlin Club, Bogotá — crowd at peak", aspect: "tall" },
+  { src: "/assets/danko_meaclando_2.jpeg", alt: "Danko mixing — close-up on the mixer", aspect: "square" },
+  { src: "/assets/danko_b2b_brandon_2.jpeg", alt: "B2B with Brandon — set two", aspect: "wide" },
+  { src: "/assets/danko_practice.jpeg", alt: "Danko practicing at home", aspect: "square" },
 ];
 
 const aspectClass: Record<Photo["aspect"], string> = {
