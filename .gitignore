@@ -45,5 +45,6 @@ yarn-error.log*
 .vscode/
 .idea/
 
-# Claude Code local
+# Claude Code local (settings and plugin-installed skills)
 .claude/settings.local.json
+.claude/skills/
