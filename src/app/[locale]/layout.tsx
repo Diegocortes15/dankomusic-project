@@ -3,6 +3,8 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale, getTranslations } from "next-intl/server";
 import { fontBody, fontDisplay } from "@/lib/fonts";
 import { routing } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+import { personSchema, BASE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -17,6 +19,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
   return {
+    metadataBase: new URL(BASE_URL),
     title: t("title"),
     description: t("description"),
     alternates: {
@@ -57,6 +60,12 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${fontDisplay.variable} ${fontBody.variable}`}>
       <body className="bg-base text-text antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personSchema(locale as Locale)),
+          }}
+        />
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
       </body>
     </html>
