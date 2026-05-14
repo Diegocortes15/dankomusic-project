@@ -22,9 +22,10 @@ export function SoundCloudEmbed({ url, title, size = "md" }: Props) {
         width="100%"
         height={height}
         scrolling="no"
-        frameBorder="no"
+        loading="lazy"
         allow="autoplay"
         src={src}
+        style={{ border: 0 }}
         className="block"
       />
       <noscript>
