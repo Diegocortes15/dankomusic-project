@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "title": "Danko — Peak Time Techno · Bogotá",
+    "description": "DJ Danko. Peak Time Techno y Hard Trance desde Bogotá, Colombia. Sets, próximos lanzamientos, fechas y booking internacional.",
+    "ogAlt": "Danko en cabina"
+  },
+  "nav": {
+    "bio": "Bio",
+    "music": "Música",
+    "releases": "Lanzamientos",
+    "shows": "Fechas",
+    "gallery": "Galería",
+    "contact": "Contacto",
+    "switchLocale": "Cambiar idioma"
+  },
+  "hero": {
+    "tagline": "Peak Time Techno · Bogotá",
+    "ctaListen": "Escuchar",
+    "ctaBook": "Booking"
+  },
+  "about": {
+    "heading": "Sobre Danko",
+    "shortBio": "DJ emergente de Bogotá, Colombia, especializado en Peak Time Techno y Hard Trance. Apariciones recientes en CORE Medellín y Radio Berlin Club.",
+    "longBio": "Danko construye sets densos y físicos, alternando kicks duros con melodías eufóricas de hard trance. Activo en la escena colombiana desde hace más de tres años, ha compartido cabina en formato B2B con Brandon y ocupado lineups en clubes referentes de Medellín y Bogotá. Su sonido busca el momento peak — ese punto donde la pista deja de pensar y solo responde.",
+    "readMore": "Leer más",
+    "readLess": "Cerrar",
+    "stats": {
+      "genres": "Géneros",
+      "genresValue": "Peak Time Techno · Hard Trance",
+      "base": "Base",
+      "baseValue": "Bogotá, Colombia",
+      "since": "Activo desde",
+      "sinceValue": "2022"
+    }
+  },
+  "music": {
+    "heading": "Música",
+    "featured": "Set destacado",
+    "more": "Más sets",
+    "embedFallback": "Si el reproductor no carga, escucha directamente en SoundCloud."
+  },
+  "releases": {
+    "heading": "Próximos lanzamientos",
+    "out": "Disponible ahora",
+    "soon": "Próximamente",
+    "preSave": "Pre-save",
+    "listen": "Escuchar"
+  },
+  "shows": {
+    "heading": "Fechas",
+    "upcoming": "Próximas",
+    "past": "Anteriores",
+    "tickets": "Entradas",
+    "noUpcoming": "Próximas fechas se anunciarán pronto."
+  },
+  "gallery": {
+    "heading": "Galería"
+  },
+  "contact": {
+    "heading": "Contacto",
+    "bookingLead": "Para bookings internacionales y nacionales:",
+    "emailLabel": "Email de booking",
+    "follow": "Seguir a Danko"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  }
+}

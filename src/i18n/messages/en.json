@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "title": "Danko — Peak Time Techno · Bogotá",
+    "description": "DJ Danko. Peak Time Techno and Hard Trance from Bogotá, Colombia. Sets, upcoming releases, tour dates, and international booking.",
+    "ogAlt": "Danko behind the decks"
+  },
+  "nav": {
+    "bio": "Bio",
+    "music": "Music",
+    "releases": "Releases",
+    "shows": "Shows",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "switchLocale": "Switch language"
+  },
+  "hero": {
+    "tagline": "Peak Time Techno · Bogotá",
+    "ctaListen": "Listen",
+    "ctaBook": "Booking"
+  },
+  "about": {
+    "heading": "About Danko",
+    "shortBio": "Emerging DJ from Bogotá, Colombia, specializing in Peak Time Techno and Hard Trance. Recent appearances at CORE Medellín and Radio Berlin Club.",
+    "longBio": "Danko builds dense, physical sets, alternating hard kicks with euphoric hard trance melodies. Active in the Colombian scene for more than three years, he has shared the booth in B2B format with Brandon and held lineup slots at reference clubs in Medellín and Bogotá. His sound chases the peak — the moment when the floor stops thinking and just responds.",
+    "readMore": "Read more",
+    "readLess": "Close",
+    "stats": {
+      "genres": "Genres",
+      "genresValue": "Peak Time Techno · Hard Trance",
+      "base": "Based in",
+      "baseValue": "Bogotá, Colombia",
+      "since": "Active since",
+      "sinceValue": "2022"
+    }
+  },
+  "music": {
+    "heading": "Music",
+    "featured": "Featured set",
+    "more": "More sets",
+    "embedFallback": "If the player does not load, listen directly on SoundCloud."
+  },
+  "releases": {
+    "heading": "Upcoming releases",
+    "out": "Out now",
+    "soon": "Coming soon",
+    "preSave": "Pre-save",
+    "listen": "Listen"
+  },
+  "shows": {
+    "heading": "Shows",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "tickets": "Tickets",
+    "noUpcoming": "Upcoming dates will be announced soon."
+  },
+  "gallery": {
+    "heading": "Gallery"
+  },
+  "contact": {
+    "heading": "Contact",
+    "bookingLead": "For international and national bookings:",
+    "emailLabel": "Booking email",
+    "follow": "Follow Danko"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}
