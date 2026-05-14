@@ -20,7 +20,10 @@ export function About() {
 
         {expanded && (
           <Reveal>
-            <p className="mt-8 max-w-3xl text-lg leading-relaxed text-text-muted">
+            <p
+              id="about-long-bio"
+              className="mt-8 max-w-3xl text-lg leading-relaxed text-text-muted"
+            >
               {t("longBio")}
             </p>
           </Reveal>
@@ -30,6 +33,8 @@ export function About() {
           <button
             type="button"
             onClick={() => setExpanded((v) => !v)}
+            aria-expanded={expanded}
+            aria-controls="about-long-bio"
             className="mt-8 text-sm uppercase tracking-widest text-silver hover:text-text transition-colors"
           >
             {expanded ? t("readLess") : t("readMore")}
