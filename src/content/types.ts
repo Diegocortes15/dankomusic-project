@@ -22,7 +22,6 @@ export type Show = {
   meta: string;
   status: "tickets" | "soldout" | "tba";
   ticketUrl?: string;
-  date?: string; // optional ISO for sorting; tools may compute from day/mon
 };
 
 export type TrackTag = "Techno" | "Hard Techno" | "Trance";
@@ -36,7 +35,6 @@ export type Track = {
   likes: number;
   url: string;
   art: string;
-  featured?: boolean;
 };
 
 export type GalleryShot = {

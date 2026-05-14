@@ -48,3 +48,4 @@ yarn-error.log*
 # Claude Code local (settings and plugin-installed skills)
 .claude/settings.local.json
 .claude/skills/
+skills-lock.json

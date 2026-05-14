@@ -16,7 +16,6 @@ export const tracks: Track[] = [
     likes: 35,
     url: "https://soundcloud.com/daniel-beltran-101291848/peak-time-kick-danko-convocatoria",
     art: "https://i1.sndcdn.com/artworks-ZoSxiwT7BTBj1rST-asAd6A-t500x500.jpg",
-    featured: true,
   },
   {
     id: "me-gustas",
