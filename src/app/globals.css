@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  /* Metallic palette — no hot color */
+  --color-base: #050505;
+  --color-surface: #0e0e10;
+  --color-text: #f4f4f2;
+  --color-text-muted: #7a7a7a;
+  --color-silver: #c8cacc;
+  --color-steel: #5a5c60;
+
+  /* Typography (font CSS variables are wired in src/lib/fonts.ts) */
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  /* Motion */
+  --ease-industrial: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background: var(--color-base);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Focus ring — non-removable, silver outline */
+:focus-visible {
+  outline: 2px solid var(--color-silver);
+  outline-offset: 2px;
+}
+
+/* prefers-reduced-motion — disable parallax/reveal/hover-scale, keep <100ms fades */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Display utility */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
