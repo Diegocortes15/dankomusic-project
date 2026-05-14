@@ -8,7 +8,6 @@ const SOUNDCLOUD_URL = "https://soundcloud.com/daniel-beltran-101291848/tracks";
 export function Footer() {
   const t = useTranslations("footer");
   const year = new Date().getFullYear();
-  const rights = t("rights").replace("{year}", String(year));
 
   return (
     <footer className="footer">
@@ -38,7 +37,7 @@ export function Footer() {
       </div>
 
       <div className="footer__rights mono">
-        <div>{rights}</div>
+        <div>{t("rights", { year })}</div>
         <div>{t("built")} · 04°35′N 74°04′W</div>
       </div>
     </footer>
