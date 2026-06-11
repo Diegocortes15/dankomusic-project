@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
 import { personSchema, BASE_URL } from "@/lib/seo";
 import { BackgroundFX } from "@/components/fx/BackgroundFX";
+import { LoaderDismiss } from "@/components/fx/LoaderDismiss";
 import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/config/themes";
 import type { Metadata } from "next";
 
@@ -59,6 +60,38 @@ const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem(${JSON.str
   DEFAULT_THEME,
 )});}})();`;
 
+/**
+ * Drives the pre-paint loader: ticks a fake % counter, defines
+ * `window.dankoHideLoader`, and a 6s safety net so the loader can never
+ * trap a user with a failed JS bundle.
+ */
+const LOADER_INIT_SCRIPT = `
+(function(){
+  window.__dankoStart = performance.now();
+  var pct = 0, el = document.getElementById('dl-pct');
+  window.__dankoLoad = setInterval(function(){
+    pct = Math.min(96, pct + Math.random() * 11);
+    if (el) el.textContent = Math.floor(pct) + '%';
+  }, 130);
+  window.__dankoLoadFail = setTimeout(function(){
+    window.dankoHideLoader && window.dankoHideLoader();
+  }, 6000);
+})();
+window.dankoHideLoader = function(){
+  clearInterval(window.__dankoLoad);
+  clearTimeout(window.__dankoLoadFail);
+  var pctEl = document.getElementById('dl-pct');
+  if (pctEl) pctEl.textContent = '100%';
+  var l = document.getElementById('danko-loader');
+  if (l) {
+    requestAnimationFrame(function(){
+      l.classList.add('is-done');
+      setTimeout(function(){ l.remove(); }, 700);
+    });
+  }
+};
+`;
+
 export default async function LocaleLayout({
   children,
   params,
@@ -94,6 +127,36 @@ export default async function LocaleLayout({
         />
       </head>
       <body>
+        {/* Preloader overlay — paints immediately before any JS runs. The
+            LoaderDismiss component below dismisses it once React hydrates. */}
+        <div id="danko-loader" aria-hidden="true">
+          <div className="dl-wordmark">
+            DANKØ
+            <span className="dl-fill" aria-hidden="true">
+              DANKØ
+            </span>
+          </div>
+          <div className="dl-eq">
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </div>
+          <div className="dl-meta">
+            <span>Peak Time Techno</span>
+            <span className="dl-dot" />
+            <span>Bogotá</span>
+            <span className="dl-dot" />
+            <span className="dl-pct" id="dl-pct" suppressHydrationWarning>
+              0%
+            </span>
+          </div>
+        </div>
+        <script dangerouslySetInnerHTML={{ __html: LOADER_INIT_SCRIPT }} />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -102,6 +165,7 @@ export default async function LocaleLayout({
         />
         <NextIntlClientProvider messages={messages}>
           <BackgroundFX />
+          <LoaderDismiss />
           <div className="app">{children}</div>
         </NextIntlClientProvider>
       </body>
