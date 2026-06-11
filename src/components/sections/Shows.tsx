@@ -22,6 +22,9 @@ function fmtMonth(iso: string, locale: string): string {
   const arr = locale === "en" ? MONTHS_EN : MONTHS_ES;
   return arr[d.getMonth()] ?? "";
 }
+function fmtYear(iso: string): string {
+  return String(new Date(`${iso}T00:00:00`).getFullYear());
+}
 
 function ShowRow({
   event,
@@ -51,6 +54,7 @@ function ShowRow({
       <div className="show__date">
         <span className="show__mon mono">{fmtMonth(event.date, locale)}</span>
         <span className="show__day">{fmtDay(event.date)}</span>
+        <span className="show__year mono">{fmtYear(event.date)}</span>
       </div>
 
       <div className="show__info">
