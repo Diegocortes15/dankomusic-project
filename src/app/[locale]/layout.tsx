@@ -83,6 +83,15 @@ export default async function LocaleLayout({
     <html lang={locale} className={fontClasses} data-theme={DEFAULT_THEME}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        {/* Preload the hero LCP image so it can paint without waiting for CSS parsing. */}
+        <link
+          rel="preload"
+          as="image"
+          href="/assets/danko_radioberlin_2.jpeg"
+          // @ts-expect-error — `fetchPriority` is a valid <link> attribute but the
+          // React typings have not yet caught up.
+          fetchpriority="high"
+        />
       </head>
       <body>
         <script
