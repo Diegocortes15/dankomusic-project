@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import type { CSSProperties, ElementType, ReactNode } from "react";
+import type {
+  CSSProperties,
+  ElementType,
+  MouseEventHandler,
+  ReactNode,
+} from "react";
 
 type Props = {
   children: ReactNode;
@@ -12,6 +17,9 @@ type Props = {
   href?: string;
   target?: string;
   rel?: string;
+  onClick?: MouseEventHandler<HTMLElement>;
+  "aria-label"?: string;
+  type?: "button" | "submit" | "reset";
 };
 
 /**

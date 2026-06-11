@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
 import { personSchema, BASE_URL } from "@/lib/seo";
 import { BackgroundFX } from "@/components/fx/BackgroundFX";
+import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/config/themes";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -45,6 +46,19 @@ export async function generateMetadata({
   };
 }
 
+/**
+ * Apply the persisted theme to <html> before React mounts to avoid an accent
+ * flash on first paint. Mirrors the logic in `ThemeSwitcher` but runs as plain
+ * JS in the document head.
+ */
+const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem(${JSON.stringify(
+  THEME_STORAGE_KEY,
+)});var v=['blue','cyan','purple','red','green','gold'];document.documentElement.setAttribute('data-theme',v.indexOf(s)>=0?s:${JSON.stringify(
+  DEFAULT_THEME,
+)});}catch(e){document.documentElement.setAttribute('data-theme',${JSON.stringify(
+  DEFAULT_THEME,
+)});}})();`;
+
 export default async function LocaleLayout({
   children,
   params,
@@ -66,7 +80,10 @@ export default async function LocaleLayout({
   ].join(" ");
 
   return (
-    <html lang={locale} className={fontClasses}>
+    <html lang={locale} className={fontClasses} data-theme={DEFAULT_THEME}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body>
         <script
           type="application/ld+json"

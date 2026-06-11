@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- @dsCard group="Brand" name="Brand · Photography" subtitle="Red-lit, motion-blur, dominant tones" viewport="700x260" -->
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="_base.css">
+<style>
+  body { padding: 24px; background: #0a0a0c; }
+  .meta { font-family: 'JetBrains Mono'; font-size: 10px; color:#6a6a74; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 12px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .tile {
+    aspect-ratio: 1; background-size: cover; background-position: center;
+    border: 1px solid #2a2a31; position: relative;
+  }
+  .tile::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(255,42,42,.15) 100%);
+  }
+  .palette-meta { font-family: 'JetBrains Mono'; font-size:10px; color:#9a9aa3; letter-spacing:.1em; text-transform:uppercase; margin-top:10px; }
+  .swatch-row { display:flex; gap:6px; margin-top:6px; }
+  .sw { width: 28px; height: 16px; border:1px solid #2a2a31; }
+</style></head>
+<body>
+  <div class="meta">PHOTOGRAPHY · RED-LIT CLUB · MOTION-BLUR · PIONEER DJ</div>
+  <div class="grid">
+    <div class="tile" style="background-image:url('../assets/photos/danko_radioberlin_1.jpeg');"></div>
+    <div class="tile" style="background-image:url('../assets/photos/danko_practice.jpeg');"></div>
+    <div class="tile" style="background-image:url('../assets/photos/danko_radioberlin_2.jpeg');"></div>
+    <div class="tile" style="background-image:url('../assets/photos/danko_mezclando_1.jpeg');"></div>
+    <div class="tile" style="background-image:url('../assets/photos/danko_b2b_brandon_1.jpeg');"></div>
+    <div class="tile" style="background-image:url('../assets/photos/danko_b2b_brandon_2.jpeg');"></div>
+    <div class="tile" style="background-image:url('../assets/photos/danko_mezclando_2.jpeg');"></div>
+    <div class="tile" style="background-image:url('../assets/photos/danko_core_medellin.jpeg');"></div>
+  </div>
+  <div class="palette-meta">DOMINANT TONES · RED · BLACK · AMBER (1 PHOTO IN VIOLET)</div>
+  <div class="swatch-row">
+    <div class="sw" style="background:#0a0a0c;"></div>
+    <div class="sw" style="background:#1a0608;"></div>
+    <div class="sw" style="background:#5a0608;"></div>
+    <div class="sw" style="background:#b00018;"></div>
+    <div class="sw" style="background:#ff2a2a;"></div>
+    <div class="sw" style="background:#ff8a14;"></div>
+    <div class="sw" style="background:#6a2bff;"></div>
+  </div>
+</body></html>

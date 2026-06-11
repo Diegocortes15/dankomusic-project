@@ -1,0 +1,32 @@
+<!doctype html>
+<!-- @dsCard group="Colors" name="Color · Steel Chrome" subtitle="Logo + ribbon-divider gradient" viewport="700x230" -->
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="_base.css">
+<style>
+  body { padding: 24px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: stretch; }
+  .chrome {
+    height: 160px;
+    background: linear-gradient(180deg, #e5e5e8 0%, #b8b8bd 30%, #6a6a74 70%, #2a2a31 100%);
+    border: 1px solid #2a2a31; padding: 12px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    box-shadow: 0 1px 0 rgba(255,255,255,.12) inset, 0 -1px 0 rgba(0,0,0,.6) inset;
+  }
+  .chrome .n { font-family: var(--font-display); font-size: 24px; color: #0a0a0c; letter-spacing: .02em; }
+  .chrome .h { font-family: var(--font-mono); font-size: 10px; color: #2a2a31; letter-spacing: .15em; text-transform: uppercase; }
+  .scale { display: flex; flex-direction: column; }
+  .scale .step { flex:1; padding: 6px 10px; font-family: var(--font-mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; display:flex; align-items:center; }
+</style></head>
+<body>
+  <div class="row">
+    <div class="chrome">
+      <div class="n">STEEL</div>
+      <div class="h">--steel-gradient · logo, ribbon dividers</div>
+    </div>
+    <div class="scale">
+      <div class="step" style="background:#e5e5e8; color:#0a0a0c;">STEEL 100 · #E5E5E8</div>
+      <div class="step" style="background:#b8b8bd; color:#0a0a0c;">STEEL 300 · #B8B8BD</div>
+      <div class="step" style="background:#8a8a90; color:#0a0a0c;">STEEL 500 · #8A8A90 · mid</div>
+      <div class="step" style="background:#4a4a52; color:#fff;">STEEL 700 · #4A4A52</div>
+    </div>
+  </div>
+</body></html>

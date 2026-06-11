@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DANKØ · Todos los shows</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="sections.css">
+  <link rel="stylesheet" href="redesign.css">
+  <link rel="stylesheet" href="responsive.css">
+  <style>
+    body { background: var(--ink-050); }
+    .allshows { max-width: 1100px; margin: 0 auto; padding: 40px max(20px, 5vw) 100px; }
+    .allshows__top {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 18px 0 28px; border-bottom: 1px solid var(--border); margin-bottom: 8px; flex-wrap: wrap;
+    }
+    .allshows__back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-heading); font-weight: 600; font-size: 12px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-700); text-decoration: none;
+      padding: 10px 14px; border: 1px solid var(--border);
+      transition: all var(--d-fast) var(--ease-snap);
+    }
+    .allshows__back:hover { color: #fff; border-color: var(--accent); background: rgba(var(--accent-rgb), .08); text-decoration: none; }
+    .allshows__brand { display: flex; align-items: center; gap: 12px; }
+    .allshows__logo { height: 34px; width: 34px; object-fit: contain; }
+    .allshows__brand-name { font-family: var(--font-display); font-size: 22px; color: #fff; text-transform: uppercase; line-height: 1; }
+    .allshows__lang { display: inline-flex; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; color: var(--ink-500); }
+    .allshows__lang button { background: none; border: none; color: inherit; cursor: pointer; font: inherit; padding: 2px 0; }
+    .allshows__lang button.is-active { color: #fff; }
+    .allshows__title { font-family: var(--font-display); font-size: clamp(48px, 9vw, 96px); line-height: 0.9; color: #fff; text-transform: uppercase; margin: 24px 0 6px; }
+    .allshows__sub { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; color: var(--accent); text-transform: uppercase; }
+    .allshows__group-h {
+      display: flex; align-items: baseline; gap: 14px; margin: 48px 0 6px;
+      font-family: var(--font-heading); font-weight: 600; font-size: 16px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #fff;
+    }
+    .allshows__group-h .count { font-family: var(--font-mono); font-size: 12px; color: var(--ink-500); }
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- persisted theme (same key as main site) -->
+  <script>
+    (function () {
+      try {
+        var s = localStorage.getItem('danko-theme');
+        document.documentElement.setAttribute('data-theme', s || 'blue');
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'blue'); }
+    })();
+  </script>
+
+  <script src="i18n.js"></script>
+  <script src="data.js"></script>
+  <script type="text/babel" src="ui.jsx"></script>
+
+  <script type="text/babel">
+    function fmtShowDate(iso, lang) {
+      const d = new Date(iso + 'T00:00:00');
+      const monthsEs = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+      const monthsEn = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+      const m = (lang === 'en' ? monthsEn : monthsEs)[d.getMonth()];
+      return { day: String(d.getDate()).padStart(2, '0'), mon: m.toUpperCase(), year: d.getFullYear() };
+    }
+    function venueCity(address) {
+      if (!address) return null;
+      const parts = address.split(',').map((s) => s.trim());
+      return parts[parts.length - 1] || null;
+    }
+
+    function Row({ event, lang, isNext }) {
+      const v = VENUES[event.venue];
+      const status = eventStatus(event.date);
+      const f = fmtShowDate(event.date, lang);
+      const city = v ? venueCity(v.address) : null;
+      const venueLabel = v ? v.name : (lang === 'en' ? 'Private party' : 'Fiesta privada');
+      const ticketMsg = event.featured
+        ? (lang === 'en'
+            ? 'Hello, I\u2019m interested in tickets for Dankø\u2019s June 14, 2026 event.'
+            : 'Hola, estoy interesado en entradas para el evento de Dankø del 14 de junio de 2026.')
+        : t('wa.general', lang);
+      return (
+        <div className={`show ${isNext ? 'show--next' : ''} show--${status}`}>
+          <div className="show__date">
+            <span className="show__mon mono">{f.mon}</span>
+            <span className="show__day">{f.day}</span>
+          </div>
+          <div className="show__info">
+            {status === 'upcoming'
+              ? <span className="show__nextTag mono"><span className="pulse-dot" />{t('event.upcoming', lang)} · {f.year}</span>
+              : <span className="show__doneTag mono"><Icon name="check" size={10} />{t('event.completed', lang)} · {f.year}</span>}
+            <div className="show__venue">{venueLabel}{city ? <span className="show__city"> · {city}</span> : null}</div>
+            <div className="show__meta">{event[lang === 'en' ? 'descEn' : 'descEs']}</div>
+            {v && v.address ? (
+              <button className="show__addr" onClick={() => window.open(mapsLink(v.address), '_blank', 'noopener')}>
+                <Icon name="map-pin" size={13} />
+                <span className="show__addr-text">{v.address}</span>
+                <span className="show__addr-hint mono">{t('venue.open', lang)} <Icon name="external" size={11} /></span>
+              </button>
+            ) : null}
+          </div>
+          <div className="show__cta-wrap">
+            {status === 'upcoming'
+              ? <a className="show__cta" href={waLink(ticketMsg)} target="_blank" rel="noopener"><Icon name="ticket" size={14} /> {t('cta.tickets', lang)}</a>
+              : <span className="show__sold mono">{t('event.completed', lang)}</span>}
+          </div>
+        </div>
+      );
+    }
+
+    function AllShows() {
+      const [lang, setLang] = React.useState('es');
+      const upcoming = EVENTS.filter((e) => eventStatus(e.date) === 'upcoming').sort((a, b) => a.date.localeCompare(b.date));
+      const past = EVENTS.filter((e) => eventStatus(e.date) === 'completed').sort((a, b) => b.date.localeCompare(a.date));
+
+      return (
+        <div className="allshows">
+          <div className="allshows__top">
+            <a className="allshows__back" href="index.html"><Icon name="arrow-left" size={14} /> {t('shows.back', lang)}</a>
+            <div className="allshows__brand">
+              <img className="allshows__logo" src="../../assets/logo/danko_logo.jpeg" alt="" />
+              <span className="allshows__brand-name">DANKØ</span>
+            </div>
+            <div className="allshows__lang">
+              <button className={lang === 'es' ? 'is-active' : ''} onClick={() => setLang('es')}>ES</button>
+              <span>/</span>
+              <button className={lang === 'en' ? 'is-active' : ''} onClick={() => setLang('en')}>EN</button>
+            </div>
+          </div>
+
+          <h1 className="allshows__title">{t('shows.allTitle', lang)}</h1>
+          <div className="allshows__sub">{upcoming.length + past.length} {lang === 'en' ? 'TOTAL DATES' : 'FECHAS EN TOTAL'}</div>
+
+          <div className="allshows__group-h">{t('shows.upcoming', lang)} <span className="count mono">{upcoming.length}</span></div>
+          <div className="shows__list">
+            {upcoming.length
+              ? upcoming.map((e, i) => <Row key={e.id} event={e} lang={lang} isNext={i === 0} />)
+              : <div className="shows__empty mono">{t('shows.empty', lang)}</div>}
+          </div>
+
+          <div className="allshows__group-h">{t('shows.past', lang)} <span className="count mono">{past.length}</span></div>
+          <div className="shows__list">
+            {past.map((e) => <Row key={e.id} event={e} lang={lang} isNext={false} />)}
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<AllShows />);
+  </script>
+</body>
+</html>

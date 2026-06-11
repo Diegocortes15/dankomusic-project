@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Top Navigation" subtitle="Fixed 56px, backdrop-blur, lang toggle" viewport="700x120" -->
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="_base.css">
+<style>
+  body { padding: 0; background: #0a0a0c; }
+  .nav {
+    height: 56px; padding: 0 24px;
+    display: flex; align-items: center; gap: 32px;
+    border-bottom: 1px solid #2a2a31;
+    background: rgba(10,10,12,.7); backdrop-filter: blur(16px) saturate(140%);
+  }
+  .logo { height: 28px; }
+  .links { display: flex; gap: 26px; flex: 1; }
+  .links a {
+    font-family: 'Oswald'; font-size: 12px; font-weight: 500; letter-spacing: .15em;
+    color: #c8c8cf; text-transform: uppercase; text-decoration: none;
+    position: relative; padding: 4px 0;
+  }
+  .links a.active { color: #fff; }
+  .links a.active::after { content: ""; position: absolute; left:0; right:0; bottom: -4px; height: 2px; background: #ff2a2a; }
+  .links a:hover { color: #ff2a2a; }
+  .lang { font-family: 'JetBrains Mono'; font-size: 11px; color: #9a9aa3; letter-spacing: .15em; }
+  .lang span.active { color: #fff; }
+  .book-btn {
+    font-family: 'Oswald'; font-size: 12px; font-weight: 600; letter-spacing: .15em;
+    color: #fff; text-transform: uppercase; padding: 8px 14px;
+    background: #ff2a2a; border: none;
+    box-shadow: 0 0 0 1px rgba(255,42,42,.25), 0 0 18px rgba(255,42,42,.35);
+  }
+  .meta-row { padding: 14px 24px; font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: .15em; color: #6a6a74; text-transform: uppercase; }
+</style></head>
+<body>
+  <div class="nav">
+    <img class="logo" src="../assets/logo/danko_logo.jpeg" alt="">
+    <div class="links">
+      <a class="active">BIO</a>
+      <a>MUSIC</a>
+      <a>SHOWS</a>
+      <a>GALLERY</a>
+      <a>CONTACT</a>
+    </div>
+    <div class="lang"><span class="active">ES</span> / <span>EN</span></div>
+    <button class="book-btn">BOOKING</button>
+  </div>
+  <div class="meta-row">FIXED NAV · 56PX · BACKDROP BLUR ON SCROLL</div>
+</body></html>

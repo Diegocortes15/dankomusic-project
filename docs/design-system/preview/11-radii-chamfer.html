@@ -1,0 +1,30 @@
+<!doctype html>
+<!-- @dsCard group="Spacing" name="Spacing · Radii & Chamfer" subtitle="Hard rectangles + flightcase corners" viewport="700x270" -->
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="_base.css">
+<style>
+  body { padding: 24px; background: var(--ink-050); }
+  .meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: .15em; color: var(--fg-muted); text-transform: uppercase; margin-bottom: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; align-items: end; }
+  .item { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+  .sw { width: 100%; height: 64px; background: linear-gradient(180deg, #e5e5e8, #6a6a74); border: 1px solid #2a2a31; }
+  .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #9a9aa3; letter-spacing: .1em; text-transform: uppercase; }
+  .chamfered {
+    background: #ff2a2a;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  }
+</style></head>
+<body>
+  <div class="meta">RADII · MOSTLY HARD-EDGED</div>
+  <div class="grid">
+    <div class="item"><div class="sw" style="border-radius:0;"></div><div class="lbl">--r-0 · 0</div><div class="lbl" style="color:#6a6a74;">default</div></div>
+    <div class="item"><div class="sw" style="border-radius:2px;"></div><div class="lbl">--r-sm · 2</div><div class="lbl" style="color:#6a6a74;">chamfer</div></div>
+    <div class="item"><div class="sw" style="border-radius:4px;"></div><div class="lbl">--r-md · 4</div><div class="lbl" style="color:#6a6a74;">inputs</div></div>
+    <div class="item"><div class="sw" style="border-radius:8px;"></div><div class="lbl">--r-lg · 8</div><div class="lbl" style="color:#6a6a74;">rare</div></div>
+    <div class="item"><div class="sw" style="border-radius:999px;"></div><div class="lbl">--r-pill</div><div class="lbl" style="color:#6a6a74;">chips</div></div>
+  </div>
+  <div class="meta" style="margin-top:24px;">CHAMFERED CORNERS · FLIGHTCASE FEEL</div>
+  <div style="display:flex; gap:12px;">
+    <div class="chamfered" style="height:48px; width:200px; display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Oswald'; font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:14px;">TICKETS →</div>
+    <div class="lbl" style="align-self:center;">8px corner cuts · top-left + bottom-right</div>
+  </div>
+</body></html>

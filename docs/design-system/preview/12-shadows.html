@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- @dsCard group="Spacing" name="Spacing · Shadow System" subtitle="Black depth + red neon glow" viewport="700x210" -->
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="_base.css">
+<style>
+  body { padding: 32px; background: var(--ink-050); }
+  .row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .box { height: 110px; background: #1a1a1f; border: 1px solid #2a2a31; display:flex; align-items:flex-end; padding: 12px; font-family:'JetBrains Mono'; font-size:10px; letter-spacing:.12em; color:#c8c8cf; text-transform: uppercase; }
+  .shadow-card { box-shadow: 0 1px 0 0 rgba(255,255,255,.04) inset, 0 8px 24px rgba(0,0,0,.6); }
+  .shadow-red  { box-shadow: 0 0 0 1px rgba(255,42,42,.25), 0 0 24px rgba(255,42,42,.35); background:#ff2a2a; color:#fff; border:none; }
+  .shadow-red-strong { box-shadow: 0 0 0 1px rgba(255,42,42,.55), 0 0 48px rgba(255,42,42,.55); background:#ff2a2a; color:#fff; border:none; }
+  .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #9a9aa3; letter-spacing: .12em; text-transform: uppercase; margin-top:8px; }
+</style></head>
+<body>
+  <div class="row">
+    <div>
+      <div class="box shadow-card">CARD · DEPTH</div>
+      <div class="lbl">--shadow-card</div>
+    </div>
+    <div>
+      <div class="box shadow-red">RED · GLOW</div>
+      <div class="lbl">--shadow-red · ctas</div>
+    </div>
+    <div>
+      <div class="box shadow-red-strong">RED · STRONG</div>
+      <div class="lbl">--shadow-red-strong · hero</div>
+    </div>
+  </div>
+</body></html>

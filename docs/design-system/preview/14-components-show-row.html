@@ -1,0 +1,43 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Show List Row" subtitle="Date / venue / tickets" viewport="700x260" -->
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="_base.css">
+<style>
+  body { padding: 24px; background: var(--ink-050); }
+  .meta { font-family: 'JetBrains Mono'; font-size: 10px; color:#6a6a74; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 14px; }
+  .show-row {
+    display: grid;
+    grid-template-columns: 96px 1fr auto;
+    gap: 20px; align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid #2a2a31;
+  }
+  .show-row:first-of-type { border-top: 1px solid #2a2a31; }
+  .date { font-family: 'Anton'; line-height: .9; color: #fff; text-transform: uppercase; }
+  .date .d { font-size: 42px; display: block; }
+  .date .m { font-size: 14px; color: #ff2a2a; letter-spacing: .15em; font-family: 'JetBrains Mono'; }
+  .info .v { font-family: 'Oswald'; font-size: 18px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: .04em; }
+  .info .c { font-family: 'JetBrains Mono'; font-size: 11px; color: #9a9aa3; letter-spacing: .15em; text-transform: uppercase; margin-top: 4px; }
+  .cta { font-family: 'Oswald'; font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #fff; border: 1px solid #3d3d46; padding: 10px 16px; }
+  .cta:hover { background:#ff2a2a; border-color:#ff2a2a; }
+  .next-tag { display:inline-block; font-family:'JetBrains Mono'; font-size:9px; color:#ff2a2a; letter-spacing:.2em; padding:3px 7px; border:1px solid #ff2a2a; margin-bottom:6px; }
+</style></head>
+<body>
+  <div class="meta">SHOW LIST ROW</div>
+  <div class="show-row">
+    <div class="date"><span class="m">JUN</span><span class="d">14</span></div>
+    <div class="info">
+      <div class="next-tag">PRÓXIMA</div>
+      <div class="v">RADIO BERLIN · BOGOTÁ</div>
+      <div class="c">CO · 23:00 — 04:00 · B2B BRANDON</div>
+    </div>
+    <div class="cta">TICKETS →</div>
+  </div>
+  <div class="show-row">
+    <div class="date"><span class="m">JUL</span><span class="d">06</span></div>
+    <div class="info">
+      <div class="v">CORE FESTIVAL · MEDELLÍN</div>
+      <div class="c">CO · MAIN STAGE · 01:00 SET</div>
+    </div>
+    <div class="cta">TICKETS →</div>
+  </div>
+</body></html>

@@ -49,3 +49,6 @@ yarn-error.log*
 .claude/settings.local.json
 .claude/skills/
 skills-lock.json
+
+# Design kit reference (lives in docs/design-system; do not ship the public copy)
+public/assets/DJ Danko Design System/

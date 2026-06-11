@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Gallery Card" subtitle="Photo + bottom protection gradient" viewport="700x340" -->
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="_base.css">
+<style>
+  body { padding: 24px; background: var(--ink-050); }
+  .meta { font-family: 'JetBrains Mono'; font-size: 10px; color:#6a6a74; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 14px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card {
+    background: #1a1a1f; border: 1px solid #2a2a31;
+    aspect-ratio: 4 / 3;
+    background-size: cover; background-position: center;
+    position: relative; overflow: hidden;
+    box-shadow: 0 1px 0 0 rgba(255,255,255,.04) inset, 0 8px 24px rgba(0,0,0,.6);
+  }
+  .card::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.85) 100%);
+  }
+  .card .cap {
+    position: absolute; left: 14px; right: 14px; bottom: 12px; z-index: 2;
+    font-family: 'Oswald'; font-size: 14px; font-weight: 600; color: #fff;
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+  .card .meta-cap {
+    font-family: 'JetBrains Mono'; font-size: 10px; color: #ff2a2a;
+    letter-spacing: .18em; margin-bottom: 4px;
+  }
+  .a { background-image: url('../assets/photos/danko_radioberlin_1.jpeg'); }
+  .b { background-image: url('../assets/photos/danko_core_medellin.jpeg'); }
+</style></head>
+<body>
+  <div class="meta">GALLERY CARD · 1PX HAIRLINE + DARK PROTECTION</div>
+  <div class="grid">
+    <div class="card a">
+      <div class="cap"><div class="meta-cap">MAY 2026 · BOGOTÁ</div>RADIO BERLIN</div>
+    </div>
+    <div class="card b">
+      <div class="cap"><div class="meta-cap">APR 2026 · MEDELLÍN</div>CORE FESTIVAL</div>
+    </div>
+  </div>
+</body></html>

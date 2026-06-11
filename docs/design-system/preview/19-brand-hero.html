@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- @dsCard group="Brand" name="Brand · Hero Treatment" subtitle="Name over photo, red radial glow" viewport="700x340" -->
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="_base.css">
+<style>
+  body { padding: 0; margin: 0; background: #000; height: 340px; position: relative; overflow: hidden; }
+  .photo {
+    position: absolute; inset: 0;
+    background: url('../assets/photos/danko_radioberlin_2.jpeg') center/cover no-repeat;
+    filter: saturate(110%);
+  }
+  .photo::after {
+    content:""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,.2) 40%, rgba(0,0,0,.85) 100%);
+  }
+  .content {
+    position: absolute; left: 32px; right: 32px; bottom: 24px;
+    color: #fff; z-index: 2;
+  }
+  .eyebrow { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: .25em; color: #ff2a2a; text-transform: uppercase; margin-bottom: 8px; }
+  .name {
+    font-family: 'Anton'; font-size: 120px; line-height: .85; letter-spacing: -0.02em;
+    text-transform: uppercase;
+    text-shadow: 0 0 60px rgba(255,42,42,.55);
+  }
+  .sub { font-family: 'Oswald'; font-size: 14px; font-weight: 500; letter-spacing: .25em; text-transform: uppercase; color: #c8c8cf; margin-top: 6px; }
+  .glow {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+    width: 600px; height: 280px; pointer-events: none;
+    background: radial-gradient(ellipse, rgba(255,42,42,.4), transparent 60%);
+    mix-blend-mode: screen;
+  }
+</style></head>
+<body>
+  <div class="photo"></div>
+  <div class="glow"></div>
+  <div class="content">
+    <div class="eyebrow">PEAK TIME TECHNO · BOGOTÁ, CO</div>
+    <div class="name">DANKO</div>
+    <div class="sub">140+ BPM · HARD TRANCE</div>
+  </div>
+</body></html>

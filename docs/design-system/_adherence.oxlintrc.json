@@ -1,0 +1,223 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "ui_kits/website/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Anton|Oswald|Inter|JetBrains Mono))/i]",
+        "message": "Font not provided by the design system. Available: Anton, Oswald, Inter, JetBrains Mono."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {},
+    "tokens": [
+      "--accent",
+      "--accent-100",
+      "--accent-deep",
+      "--accent-fg",
+      "--accent-hover",
+      "--accent-press",
+      "--accent-rgb",
+      "--bg",
+      "--bg-card",
+      "--bg-elevated",
+      "--bg-inverse",
+      "--border",
+      "--border-strong",
+      "--c-danger",
+      "--c-success",
+      "--c-warning",
+      "--d-base",
+      "--d-fast",
+      "--d-slow",
+      "--ease-out",
+      "--ease-snap",
+      "--fg",
+      "--fg-faint",
+      "--fg-inverse",
+      "--fg-muted",
+      "--font-body",
+      "--font-display",
+      "--font-heading",
+      "--font-mono",
+      "--fs-body",
+      "--fs-body-lg",
+      "--fs-body-sm",
+      "--fs-caption",
+      "--fs-display-2xl",
+      "--fs-display-lg",
+      "--fs-display-xl",
+      "--fs-eyebrow",
+      "--fs-h1",
+      "--fs-h2",
+      "--fs-h3",
+      "--fs-h4",
+      "--ink-000",
+      "--ink-050",
+      "--ink-100",
+      "--ink-200",
+      "--ink-300",
+      "--ink-400",
+      "--ink-500",
+      "--ink-600",
+      "--ink-700",
+      "--ink-800",
+      "--ink-900",
+      "--noise-opacity",
+      "--r-0",
+      "--r-lg",
+      "--r-md",
+      "--r-pill",
+      "--r-sm",
+      "--s-1",
+      "--s-10",
+      "--s-2",
+      "--s-3",
+      "--s-4",
+      "--s-5",
+      "--s-6",
+      "--s-7",
+      "--s-8",
+      "--s-9",
+      "--shadow-accent",
+      "--shadow-accent-strong",
+      "--shadow-card",
+      "--shadow-red",
+      "--shadow-red-strong",
+      "--shadow-steel",
+      "--steel-100",
+      "--steel-300",
+      "--steel-500",
+      "--steel-700",
+      "--steel-gradient"
+    ],
+    "tokenKinds": {
+      "--ink-000": "color",
+      "--ink-050": "color",
+      "--ink-100": "color",
+      "--ink-200": "color",
+      "--ink-300": "color",
+      "--ink-400": "color",
+      "--ink-500": "color",
+      "--ink-600": "color",
+      "--ink-700": "color",
+      "--ink-800": "color",
+      "--ink-900": "color",
+      "--steel-100": "color",
+      "--steel-300": "color",
+      "--steel-500": "color",
+      "--steel-700": "color",
+      "--steel-gradient": "other",
+      "--c-success": "color",
+      "--c-warning": "color",
+      "--c-danger": "color",
+      "--accent-100": "color",
+      "--accent": "color",
+      "--accent-hover": "color",
+      "--accent-press": "color",
+      "--accent-rgb": "other",
+      "--accent-fg": "color",
+      "--accent-deep": "color",
+      "--bg": "color",
+      "--bg-elevated": "color",
+      "--bg-card": "color",
+      "--bg-inverse": "color",
+      "--fg": "color",
+      "--fg-muted": "color",
+      "--fg-faint": "color",
+      "--fg-inverse": "color",
+      "--border": "color",
+      "--border-strong": "color",
+      "--font-display": "font",
+      "--font-heading": "font",
+      "--font-body": "font",
+      "--font-mono": "font",
+      "--fs-display-2xl": "font",
+      "--fs-display-xl": "font",
+      "--fs-display-lg": "font",
+      "--fs-h1": "spacing",
+      "--fs-h2": "spacing",
+      "--fs-h3": "spacing",
+      "--fs-h4": "spacing",
+      "--fs-body-lg": "spacing",
+      "--fs-body": "spacing",
+      "--fs-body-sm": "spacing",
+      "--fs-caption": "spacing",
+      "--fs-eyebrow": "spacing",
+      "--s-1": "spacing",
+      "--s-2": "spacing",
+      "--s-3": "spacing",
+      "--s-4": "spacing",
+      "--s-5": "spacing",
+      "--s-6": "spacing",
+      "--s-7": "spacing",
+      "--s-8": "spacing",
+      "--s-9": "spacing",
+      "--s-10": "spacing",
+      "--r-0": "spacing",
+      "--r-sm": "spacing",
+      "--r-md": "spacing",
+      "--r-lg": "spacing",
+      "--r-pill": "spacing",
+      "--shadow-card": "shadow",
+      "--shadow-accent": "shadow",
+      "--shadow-accent-strong": "shadow",
+      "--shadow-red": "shadow",
+      "--shadow-red-strong": "shadow",
+      "--shadow-steel": "shadow",
+      "--ease-snap": "other",
+      "--ease-out": "other",
+      "--d-fast": "other",
+      "--d-base": "other",
+      "--d-slow": "other",
+      "--noise-opacity": "other"
+    },
+    "fontFamilies": [
+      "Anton",
+      "Inter",
+      "JetBrains Mono",
+      "Oswald"
+    ]
+  }
+}

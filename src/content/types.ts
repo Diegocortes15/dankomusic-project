@@ -1,45 +1,11 @@
-export type Release = {
-  id: string;
-  title: string;
-  label?: string;
-  releaseDate: string; // ISO date (YYYY-MM-DD)
-  artwork: string;
-  presave: PresaveLink[];
-};
+/**
+ * Shared shapes for runtime content live in `src/config/*`.
+ * This file is kept as a re-export hub so future migrations can land here
+ * without dragging every component through path updates.
+ */
 
-export type PresaveLink = {
-  id: "spotify" | "beatport" | "apple" | "soundcloud";
-  label: string;
-  href: string;
-};
-
-export type Show = {
-  id: string;
-  day: string; // "14"
-  mon: string; // "JUN"
-  venue: string;
-  city: string;
-  meta: string;
-  status: "tickets" | "soldout" | "tba";
-  ticketUrl?: string;
-};
-
-export type TrackTag = "Techno" | "Hard Techno" | "Trance";
-
-export type Track = {
-  id: string;
-  title: string;
-  tag: TrackTag;
-  date: string; // ISO date (YYYY-MM-DD)
-  plays: number;
-  likes: number;
-  url: string;
-  art: string;
-};
-
-export type GalleryShot = {
-  src: string;
-  cap: string;
-  meta: string;
-  span?: "wide" | "tall";
-};
+export type { DankoEvent, EventStatus } from "@/config/events";
+export type { Venue, VenueId } from "@/config/venues";
+export type { GalleryShot } from "@/config/gallery";
+export type { ThemeId, Theme } from "@/config/themes";
+export type { Locale } from "@/config/slogans";
