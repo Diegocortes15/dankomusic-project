@@ -58,7 +58,7 @@ function ShowRow({
       <div className="show__info">
         {isNext ? (
           <span className="show__nextTag mono">
-            <span className="pulse-dot" />
+            <span className="pulse-dot" aria-hidden="true" />
             {tEvent("upcoming")}
           </span>
         ) : (

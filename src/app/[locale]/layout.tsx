@@ -26,6 +26,7 @@ export async function generateMetadata({
     title: t("title"),
     description: t("description"),
     alternates: {
+      canonical: `/${locale}`,
       languages: {
         es: "/es",
         en: "/en",
@@ -37,7 +38,16 @@ export async function generateMetadata({
       description: t("description"),
       locale,
       type: "website",
-      images: [{ url: "/assets/danko_radioberlin_1.jpeg", alt: t("ogAlt") }],
+      url: `/${locale}`,
+      siteName: "DJ Dankø",
+      images: [
+        {
+          url: "/assets/danko_radioberlin_1.jpeg",
+          alt: t("ogAlt"),
+          width: 1200,
+          height: 1500,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
@@ -126,15 +136,10 @@ export default async function LocaleLayout({
     <html lang={locale} className={fontClasses} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
-        {/* Preload the hero LCP image so it can paint without waiting for CSS parsing. */}
-        <link
-          rel="preload"
-          as="image"
-          href="/assets/danko_radioberlin_2.jpeg"
-          // @ts-expect-error — `fetchPriority` is a valid <link> attribute but the
-          // React typings have not yet caught up.
-          fetchpriority="high"
-        />
+        {/* SoundCloud widget loads after first paint; the preconnect warms the
+            TLS handshake to its CDN so the embed lands faster when scrolled to. */}
+        <link rel="preconnect" href="https://w.soundcloud.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://i1.sndcdn.com" />
       </head>
       <body>
         {/* Preloader overlay — paints immediately before any JS runs. The

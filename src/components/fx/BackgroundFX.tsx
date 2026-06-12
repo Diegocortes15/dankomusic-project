@@ -16,7 +16,13 @@ export function BackgroundFX() {
     const node = trackRef.current;
     if (!node) return;
 
+    // Respect prefers-reduced-motion: no rAF loop, no cursor tracking — the
+    // CSS-only drift gradient still renders, which is enough ambience.
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduced.matches) return;
+
     let raf = 0;
+    let running = false;
     const target = { x: 0.5, y: 0.4 };
     const current = { x: 0.5, y: 0.4 };
 
@@ -38,14 +44,34 @@ export function BackgroundFX() {
       node.style.setProperty("--my", `${(current.y * 100).toFixed(2)}%`);
       raf = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
 
+    const start = () => {
+      if (running) return;
+      running = true;
+      raf = requestAnimationFrame(tick);
+    };
+    const stop = () => {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(raf);
+    };
+
+    const onVisibility = () => {
+      // Pausing the rAF loop while the tab is backgrounded gives back the
+      // main-thread budget Lighthouse measures as "wasted" cursor lerp work.
+      if (document.hidden) stop();
+      else start();
+    };
+
+    start();
     window.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("touchmove", onTouch, { passive: true });
+    document.addEventListener("visibilitychange", onVisibility);
     return () => {
-      cancelAnimationFrame(raf);
+      stop();
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("touchmove", onTouch);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 

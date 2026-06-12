@@ -404,7 +404,9 @@ a.btn, a.btn:hover { text-decoration: none; }
   content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--accent);
 }
 .nav__lang { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--ink-500); }
-.nav__lang button { background: none; border: none; color: inherit; cursor: pointer; font: inherit; padding: 2px 0; transition: color var(--d-fast) var(--ease-snap); }
+/* Tap target ≥ 24px tall via padding so Lighthouse a11y stops flagging the
+   ES/EN switcher. Visible glyph still reads as the same compact pill. */
+.nav__lang button { background: none; border: none; color: inherit; cursor: pointer; font: inherit; padding: 8px 4px; transition: color var(--d-fast) var(--ease-snap); }
 .nav__lang button.is-active { color: #fff; }
 .nav__lang button:hover { color: var(--accent); }
 .nav__book { padding: 8px 14px; font-size: 11px; }
@@ -455,10 +457,14 @@ a.btn, a.btn:hover { text-decoration: none; }
 .hero__photo-wrap { position: absolute; inset: -10% -2% -10% -2%; overflow: hidden; }
 .hero__photo {
   position: absolute; inset: 0;
-  background: url("/assets/danko_radioberlin_2.jpeg") center / cover no-repeat;
-  /* Strip the warm club lighting so the only colour in the hero is the brand glow. */
-  filter: grayscale(1) contrast(108%) brightness(95%);
   transform: scale(1.08); will-change: transform;
+}
+/* next/image serves the LCP photo as AVIF/WebP via the Vercel image
+   optimisation pipeline. The grayscale + contrast strip the warm club
+   lighting so the only colour in the hero is the brand glow. */
+.hero__photo-img {
+  object-fit: cover;
+  filter: grayscale(1) contrast(108%) brightness(95%);
 }
 .hero__protection {
   position: absolute; inset: 0;
