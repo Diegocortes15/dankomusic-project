@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
@@ -47,7 +48,17 @@ export function Hero() {
   return (
     <section id="top" className="hero">
       <div className="hero__photo-wrap">
-        <div className="hero__photo" ref={photoRef} />
+        <div className="hero__photo" ref={photoRef}>
+          <Image
+            src="/assets/danko_radioberlin_2.jpeg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            quality={80}
+            className="hero__photo-img"
+          />
+        </div>
       </div>
       <div className="hero__protection" />
       <div className="hero__glow" />
@@ -102,7 +113,7 @@ export function Hero() {
             }}
           >
             <span className="hero__event-badge mono">
-              <span className="pulse-dot" />
+              <span className="pulse-dot" aria-hidden="true" />
               {tEvent("next")}
             </span>
             <span className="hero__event-date mono">{featuredDateLabel}</span>
