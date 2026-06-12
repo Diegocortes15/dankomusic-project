@@ -74,22 +74,23 @@ function ShowRow({
           {city ? <span className="show__city"> · {city}</span> : null}
         </div>
         <div className="show__meta">{desc}</div>
-        {venue.address ? (
-          <button
-            type="button"
-            className="show__addr"
-            onClick={() =>
-              window.open(mapsLink(venue.address!), "_blank", "noopener,noreferrer")
-            }
-          >
-            <Icon name="map-pin" size={13} />
-            <span className="show__addr-text">{venue.address}</span>
-            <span className="show__addr-hint mono">
-              {tVenue("open")} <Icon name="external" size={11} />
-            </span>
-          </button>
-        ) : null}
       </div>
+
+      {venue.address ? (
+        <button
+          type="button"
+          className="show__addr"
+          onClick={() =>
+            window.open(mapsLink(venue.address!), "_blank", "noopener,noreferrer")
+          }
+        >
+          <Icon name="map-pin" size={13} />
+          <span className="show__addr-text">{venue.address}</span>
+          <span className="show__addr-hint mono">
+            {tVenue("open")} <Icon name="external" size={11} />
+          </span>
+        </button>
+      ) : null}
 
       <div className="show__cta-wrap">
         {status === "upcoming" ? (
