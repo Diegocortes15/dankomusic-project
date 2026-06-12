@@ -19,6 +19,10 @@ function readInitialTheme(): ThemeId {
   return isThemeId(attr) ? attr : DEFAULT_THEME;
 }
 
+/** Custom event broadcast on every theme change so other components
+ * (e.g. the SoundCloud embed) can react and recolour live. */
+export const THEME_CHANGE_EVENT = "danko-theme-change";
+
 function applyTheme(id: ThemeId): void {
   document.documentElement.setAttribute("data-theme", id);
   try {
@@ -26,6 +30,7 @@ function applyTheme(id: ThemeId): void {
   } catch {
     /* storage unavailable — silently no-op */
   }
+  window.dispatchEvent(new CustomEvent(THEME_CHANGE_EVENT, { detail: { id } }));
 }
 
 /**

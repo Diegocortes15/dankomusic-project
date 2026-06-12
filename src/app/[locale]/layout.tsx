@@ -113,7 +113,13 @@ export default async function LocaleLayout({
   ].join(" ");
 
   return (
-    <html lang={locale} className={fontClasses} data-theme={DEFAULT_THEME}>
+    // `data-theme` is intentionally NOT rendered here — the pre-paint
+    // script in <head> is the single source of truth for that attribute
+    // (it reads localStorage so a refresh restores the user's chosen
+    // accent). Rendering it in JSX would cause React to reconcile it back
+    // to the SSR default after hydration, overwriting the persisted theme.
+    // `suppressHydrationWarning` silences the resulting attribute diff.
+    <html lang={locale} className={fontClasses} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         {/* Preload the hero LCP image so it can paint without waiting for CSS parsing. */}
