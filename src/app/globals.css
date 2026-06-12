@@ -1003,7 +1003,8 @@ a.btn, a.btn:hover { text-decoration: none; }
 }
 @media (max-width: 760px) {
   .nav__links { display: none; }
-  .nav__book-label { display: none; }
+  /* Keep the "CONTACTO" label next to the WhatsApp icon on phones so the
+     CTA reads as a button, not a lonely glyph. */
   .theme-switch__panel { right: auto; left: 0; }
 }
 @media (max-width: 720px) {

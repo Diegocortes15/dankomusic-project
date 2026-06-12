@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "./LocaleSwitcher";
-import { ThemeSwitcher } from "./ThemeSwitcher";
+// Theme switcher import kept commented next to its JSX (below) so toggling
+// the feature is a paired edit instead of a hunt across the file.
+// import { ThemeSwitcher } from "./ThemeSwitcher";
 import { Icon } from "@/components/ui/Icon";
 import { waLink } from "@/config/site";
 
@@ -95,7 +97,11 @@ export function Nav() {
         ))}
       </div>
       <LocaleSwitcher />
-      <ThemeSwitcher />
+      {/* Theme switcher hidden for the public launch — the brand surfaces
+          read cleaner on the default Electric Blue. Uncomment to bring it
+          back: the underlying state, CSS variables and persistence layer
+          stay live, so re-enabling is a one-line change. */}
+      {/* <ThemeSwitcher /> */}
       <a
         className="btn btn--primary nav__book"
         href={waLink(tWa("general"))}
