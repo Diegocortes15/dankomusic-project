@@ -1022,6 +1022,26 @@ a.btn, a.btn:hover { text-decoration: none; }
   .show__cta-wrap { grid-area: cta; }
   .show__day { font-size: 44px; line-height: 1; }
   .show__year { font-size: 10px; letter-spacing: 0.18em; margin-top: 2px; }
+  /* Address chip stretches the full width of the show row on phones so the
+     venue address reads as a clear tap target rather than a half-row pill. */
+  .show__addr {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+  }
+  .show__addr-text {
+    flex: 1;
+    min-width: 0;
+    font-size: 12px;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  .show__addr-hint {
+    margin-left: auto;
+    opacity: 1; /* no hover on touch — keep the affordance visible */
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
   .show__cta, .show__sold { width: 100%; text-align: center; justify-content: center; padding: 14px 16px; font-size: 12px; }
   .gallery__grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; gap: 4px; }
   .g-tile__cap { font-size: 13px; left: 10px; right: 10px; bottom: 10px; }

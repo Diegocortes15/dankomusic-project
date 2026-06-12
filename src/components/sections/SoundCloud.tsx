@@ -36,7 +36,7 @@ export function SoundCloud() {
     <section id="music" className="section section--accent soundcloud">
       <div className="soundcloud__halo" />
       <Reveal>
-        <SectionStarter num={4} total={4} title={t("title")} lede={t("lede")} />
+        <SectionStarter num={4} total={5} title={t("title")} lede={t("lede")} />
       </Reveal>
 
       <Reveal delay={120} className="sc-deck">

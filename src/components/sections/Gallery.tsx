@@ -17,7 +17,7 @@ export function Gallery() {
   return (
     <section id="gallery" className="section gallery">
       <Reveal>
-        <SectionStarter num={3} total={4} title={t("title")} lede={t("lede")} />
+        <SectionStarter num={3} total={5} title={t("title")} lede={t("lede")} />
       </Reveal>
       <div className="gallery__grid">
         {GALLERY_SHOTS.map((s, i) => (

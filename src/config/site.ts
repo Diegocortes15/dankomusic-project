@@ -5,7 +5,7 @@
 
 export const WHATSAPP_NUMBER = "573152085980"; // +57 315 208 5980, digits only
 export const WHATSAPP_DISPLAY = "+57 315 208 5980";
-export const EMAIL = "didami1013@gmail.com";
+export const EMAIL = "danko.djmusic@gmail.com";
 export const INSTAGRAM_USER = "danko_d.j";
 export const INSTAGRAM_URL = "https://www.instagram.com/danko_d.j/";
 export const SOUNDCLOUD_URL = "https://soundcloud.com/daniel-beltran-101291848";

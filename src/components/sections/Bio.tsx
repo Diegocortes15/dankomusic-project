@@ -15,7 +15,7 @@ export function Bio() {
       <Reveal>
         <SectionStarter
           num={1}
-          total={4}
+          total={5}
           title={t("title")}
           lede={SLOGANS.alt[0]?.[locale]}
         />

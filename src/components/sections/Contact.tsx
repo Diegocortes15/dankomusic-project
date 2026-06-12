@@ -20,7 +20,7 @@ export function Contact() {
   return (
     <section id="contact" className="section contact">
       <Reveal>
-        <SectionStarter num={5} total={4} title={t("title")} lede={t("lede")} />
+        <SectionStarter num={5} total={5} title={t("title")} lede={t("lede")} />
       </Reveal>
 
       <div className="contact__cards">

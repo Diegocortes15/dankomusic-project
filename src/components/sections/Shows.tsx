@@ -121,7 +121,7 @@ export function Shows() {
   return (
     <section id="shows" className="section section--dark shows">
       <Reveal>
-        <SectionStarter num={2} total={4} title={t("title")} lede={t("lede")} />
+        <SectionStarter num={2} total={5} title={t("title")} lede={t("lede")} />
       </Reveal>
 
       <Reveal className="shows__tabs" delay={80}>
