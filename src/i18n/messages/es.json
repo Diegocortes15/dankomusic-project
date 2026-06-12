@@ -1,77 +1,80 @@
 {
   "meta": {
     "title": "DANKØ · Peak Time Techno · Bogotá",
-    "description": "DJ Danko. Peak Time Techno y Hard Trance desde Bogotá, Colombia. Sets, próximos lanzamientos, fechas y booking internacional.",
-    "ogAlt": "Danko en cabina"
+    "description": "DJ Dankø. Peak Time Techno, Melodic Techno y Afro House desde Bogotá, Colombia. SoundCloud, fechas y booking directo por WhatsApp.",
+    "ogAlt": "Dankø en cabina"
   },
   "nav": {
-    "bio": "Bio",
-    "music": "Música",
-    "releases": "Lanzamientos",
+    "bio": "Perfil",
     "shows": "Shows",
     "gallery": "Galería",
+    "music": "SoundCloud",
     "contact": "Contacto",
-    "booking": "Booking",
-    "switchLocale": "Cambiar idioma"
+    "switchLocale": "Cambiar idioma",
+    "switchTheme": "Cambiar tema"
   },
   "hero": {
     "eyebrow": "Peak Time Techno · Bogotá, CO",
-    "tagline": "140+ BPM · Hard Trance",
-    "cta": "Escuchar último set",
-    "cta2": "Próximas fechas",
     "scroll": "Scroll"
   },
-  "bio": {
-    "title": "Bio",
-    "lede": "Daniel Beltrán — Dankø — lleva la escena bogotana al límite con sets de techno peak time a 140+ BPM. Se mueve entre Hard Trance y Industrial sin pedir permiso.",
-    "body1": "Empezó tocando en after-hours del centro de Bogotá y hoy comparte cabina con artistas de la escena hard trance latinoamericana. Su firma: transiciones quirúrgicas, kicks que cortan, drops que no perdonan.",
-    "body2": "Pioneer CDJ-3000 exclusivamente. Sets de dos horas. Disponible para bookings en Colombia y Europa.",
-    "stat1Label": "BPM promedio",
-    "stat2Label": "Sets este año",
-    "stat3Label": "Ciudades",
-    "stat4Label": "Base"
+  "cta": {
+    "soundcloud": "Escuchar en SoundCloud",
+    "whatsapp": "Contactar a Dankø",
+    "tickets": "Conseguir entradas",
+    "email": "Escribir email",
+    "follow": "Seguir"
   },
-  "music": {
-    "title": "Música",
-    "lede": "Tracks originales — techno, hard techno y trance — disponibles en SoundCloud.",
-    "latest": "Más reciente",
-    "plays": "plays",
-    "likes": "likes",
-    "playOnSC": "Reproducir",
-    "listenSC": "Abrir en SoundCloud →",
-    "viewAll": "Ver todos los tracks"
+  "wa": {
+    "general": "Hola Dankø, quiero información sobre tus eventos.",
+    "ticketsFeatured": "Hola, estoy interesado en entradas para el evento de Dankø del 14 de junio de 2026."
   },
-  "releases": {
-    "title": "Lanzamientos",
-    "lede": "Próximos lanzamientos. Pre-save para no perderte el día de salida.",
-    "presave": "Pre-save"
+  "event": {
+    "next": "Próximo evento",
+    "upcoming": "Próximo",
+    "completed": "Realizado"
+  },
+  "venue": {
+    "open": "Ver en Maps"
   },
   "shows": {
     "title": "Shows",
-    "lede": "Calendario en vivo. Las fechas se actualizan cada semana.",
+    "lede": "Calendario en vivo — de la primera fiesta entre amigos a residente en la escena de Bogotá.",
     "upcoming": "Próximas",
     "past": "Pasadas",
-    "next": "Próxima",
-    "tickets": "Tickets →",
-    "soldout": "Agotado"
+    "empty": "Sin fechas por ahora."
+  },
+  "bio": {
+    "title": "Perfil",
+    "body": "Dankø es DJ y productor con 4 años de experiencia. Su sonido se enfoca principalmente en Peak Time Techno, combinando potencia, precisión y versatilidad. Su propuesta artística también se mueve entre el Melodic Techno y el Afro House, construyendo una energía progresiva que lleva la pista hacia el peak time manteniendo una identidad propia.",
+    "tag": "BOGOTÁ · CO"
+  },
+  "stat": {
+    "sets": "Sets",
+    "bpm": "Rango BPM",
+    "exp": "Experiencia"
+  },
+  "journey": {
+    "growth": "A partir de esta etapa, Dankø se convierte en artista residente de Drop V Booking, manteniendo presencia continua en RadioBerlin y fortaleciendo su posición dentro de la escena electrónica de Bogotá."
   },
   "gallery": {
-    "title": "Galería / Gallery",
-    "lede": "Cabina. Pista. Festival. Fotografías por la escena."
+    "title": "Galería",
+    "lede": "Cabina, pista y club. Toca una imagen para ampliar.",
+    "openImage": "Abrir imagen",
+    "close": "Cerrar",
+    "previous": "Anterior",
+    "next": "Siguiente"
+  },
+  "sc": {
+    "title": "SOUNDCLOUD",
+    "lede": "La plataforma principal de Dankø. Sets, edits y producciones originales — dale play."
   },
   "contact": {
-    "title": "Contacto / Contact",
-    "lede": "Bookings, prensa, colaboraciones. Respuesta en 48h.",
-    "directBooking": "Direct Booking",
-    "emailCta": "Escribir a bookings@danko.dj",
-    "emailNote": "Mejor un mail directo. Recibirás respuesta en menos de 48 horas hábiles.",
-    "formDeferred": "Formulario en proceso — por ahora, contacto vía email.",
-    "direct": "O por redes:",
-    "rate": "Respuesta · < 48h"
+    "title": "Contacto",
+    "lede": "Información de eventos, prensa y colaboraciones. WhatsApp es la vía más rápida."
   },
   "footer": {
-    "tag": "Peak Time Techno · Hard Trance",
+    "tag": "Peak Time Techno · Bogotá",
     "rights": "© {year} Dankø. Todos los derechos reservados.",
-    "built": "Construido en Bogotá"
+    "built": "Hecho en Bogotá"
   }
 }

@@ -1,44 +1,62 @@
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionStarter } from "@/components/ui/SectionStarter";
-
-const STATS = [
-  { value: "142", labelKey: "stat1Label" },
-  { value: "24", labelKey: "stat2Label" },
-  { value: "11", labelKey: "stat3Label" },
-  { value: "BOG", labelKey: "stat4Label" },
-] as const;
+import { Icon } from "@/components/ui/Icon";
+import { SLOGANS, STATS } from "@/config/slogans";
 
 export function Bio() {
   const t = useTranslations("bio");
+  const tStat = useTranslations("stat");
+  const locale = useLocale() as "es" | "en";
+
   return (
     <section id="bio" className="section bio">
       <Reveal>
-        <SectionStarter num={1} total={6} title={t("title")} lede={t("lede")} />
+        <SectionStarter
+          num={1}
+          total={5}
+          title={t("title")}
+          lede={SLOGANS.alt[0]?.[locale]}
+        />
       </Reveal>
+
       <div className="bio__grid">
         <Reveal delay={120} className="bio__copy">
-          <p>{t("body1")}</p>
-          <p>{t("body2")}</p>
+          <p className="bio__lead">{t("body")}</p>
         </Reveal>
         <Reveal as="aside" delay={200} className="bio__photo">
           <Image
             src="/assets/danko_mezclando_2.jpeg"
-            alt="Dankø at the decks"
+            alt="Dankø"
             fill
-            sizes="(max-width: 860px) 100vw, 40vw"
-            className="bio__photo-img"
+            sizes="(max-width: 980px) 100vw, 40vw"
           />
+          <span className="bio__photo-tag mono">{t("tag")}</span>
         </Reveal>
       </div>
-      <div className="bio__stats">
-        {STATS.map((s, i) => (
-          <Reveal key={s.labelKey} delay={i * 80} className="bio__stat">
-            <div className="bio__stat-v">{s.value}</div>
-            <div className="bio__stat-l">{t(s.labelKey)}</div>
-          </Reveal>
-        ))}
+
+      <div className="stats">
+        {STATS.map((s, i) => {
+          const suffix = "suffix" in s ? s.suffix[locale] : null;
+          return (
+            <Reveal key={s.labelKey} delay={i * 90} className="stat-card">
+              <div className="stat-card__top">
+                <span className="stat-card__icon">
+                  <Icon name={s.icon} size={18} />
+                </span>
+                <span className="stat-card__label mono">{tStat(s.labelKey.replace("stat.", ""))}</span>
+              </div>
+              <div className="stat-card__value">
+                {s.value}
+                {suffix ? <span className="stat-card__suffix">{suffix}</span> : null}
+              </div>
+              <div className="stat-card__bar">
+                <span />
+              </div>
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );

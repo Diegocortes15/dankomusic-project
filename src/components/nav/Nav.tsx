@@ -4,16 +4,18 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "./LocaleSwitcher";
-import { hasUpcomingReleases } from "@/content/releases";
+import { ThemeSwitcher } from "./ThemeSwitcher";
+import { Icon } from "@/components/ui/Icon";
+import { waLink } from "@/config/site";
 
-type SectionId = "top" | "bio" | "music" | "releases" | "shows" | "gallery" | "contact";
+type SectionId = "top" | "bio" | "shows" | "gallery" | "music" | "contact";
 
-const SCROLL_THRESHOLD = 60;
 const NAV_OFFSET = 56;
+const SCROLL_THRESHOLD = 60;
 
 export function Nav() {
   const t = useTranslations("nav");
-  const showReleases = hasUpcomingReleases();
+  const tWa = useTranslations("wa");
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<SectionId>("bio");
 
@@ -25,7 +27,7 @@ export function Nav() {
   }, []);
 
   useEffect(() => {
-    const ids: SectionId[] = ["top", "bio", "music", "releases", "shows", "gallery", "contact"];
+    const ids: SectionId[] = ["top", "bio", "shows", "gallery", "music", "contact"];
     const obs = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -58,10 +60,9 @@ export function Nav() {
 
   const links: Array<{ id: SectionId; label: string }> = [
     { id: "bio", label: t("bio") },
-    { id: "music", label: t("music") },
-    ...(showReleases ? ([{ id: "releases" as const, label: t("releases") }]) : []),
     { id: "shows", label: t("shows") },
     { id: "gallery", label: t("gallery") },
+    { id: "music", label: t("music") },
     { id: "contact", label: t("contact") },
   ];
 
@@ -94,12 +95,16 @@ export function Nav() {
         ))}
       </div>
       <LocaleSwitcher />
+      <ThemeSwitcher />
       <a
         className="btn btn--primary nav__book"
-        href="#contact"
-        onClick={(e) => onJump(e, "contact")}
+        href={waLink(tWa("general"))}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="WhatsApp"
       >
-        {t("booking")}
+        <Icon name="whatsapp" size={15} />
+        <span className="nav__book-label">{t("contact")}</span>
       </a>
     </nav>
   );

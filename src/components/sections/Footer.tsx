@@ -1,12 +1,11 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Icon } from "@/components/ui/Icon";
-
-const INSTAGRAM_URL = "https://instagram.com/danko_d.j";
-const SOUNDCLOUD_URL = "https://soundcloud.com/daniel-beltran-101291848/tracks";
+import { COORDS, INSTAGRAM_URL, SOUNDCLOUD_URL, mailto, waLink } from "@/config/site";
 
 export function Footer() {
   const t = useTranslations("footer");
+  const tWa = useTranslations("wa");
   const year = new Date().getFullYear();
 
   return (
@@ -28,17 +27,47 @@ export function Footer() {
       </div>
 
       <div className="footer__socials">
-        <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <a
+          className="footer__social footer__social--primary"
+          href={SOUNDCLOUD_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="SoundCloud"
+        >
+          <Icon name="soundcloud" size={18} />
+        </a>
+        <a
+          className="footer__social"
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
           <Icon name="instagram" size={18} />
         </a>
-        <a href={SOUNDCLOUD_URL} target="_blank" rel="noopener noreferrer" aria-label="SoundCloud">
-          <Icon name="soundcloud" size={18} />
+        <a
+          className="footer__social"
+          href={waLink(tWa("general"))}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+        >
+          <Icon name="whatsapp" size={18} />
+        </a>
+        <a
+          className="footer__social"
+          href={mailto()}
+          aria-label="Email"
+        >
+          <Icon name="mail" size={18} />
         </a>
       </div>
 
       <div className="footer__rights mono">
         <div>{t("rights", { year })}</div>
-        <div>{t("built")} · 04°35′N 74°04′W</div>
+        <div>
+          {t("built")} · {COORDS}
+        </div>
       </div>
     </footer>
   );

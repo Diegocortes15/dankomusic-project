@@ -2,58 +2,73 @@ import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionStarter } from "@/components/ui/SectionStarter";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-
-const BOOKING_EMAIL = "bookings@danko.dj";
-const INSTAGRAM_URL = "https://instagram.com/danko_d.j";
-const INSTAGRAM_HANDLE = "@danko_d.j";
-const SOUNDCLOUD_URL = "https://soundcloud.com/daniel-beltran-101291848/tracks";
+import {
+  EMAIL,
+  INSTAGRAM_URL,
+  INSTAGRAM_USER,
+  WHATSAPP_DISPLAY,
+  mailto,
+  waLink,
+} from "@/config/site";
 
 export function Contact() {
   const t = useTranslations("contact");
-  const mailto = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent("[Booking] Dankø")}`;
+  const tCta = useTranslations("cta");
+  const tWa = useTranslations("wa");
 
   return (
     <section id="contact" className="section contact">
       <Reveal>
-        <SectionStarter num={6} total={6} title={t("title")} lede={t("lede")} />
+        <SectionStarter num={5} total={5} title={t("title")} lede={t("lede")} />
       </Reveal>
 
-      <div className="contact__hero">
-        <Reveal delay={120} className="contact__hero-meta">
-          <Eyebrow>{t("directBooking")}</Eyebrow>
-          <a className="contact__email-display mono" href={mailto}>
-            {BOOKING_EMAIL}
-          </a>
-          <p className="contact__hero-note">{t("emailNote")}</p>
-          <Button variant="primary" href={mailto}>
-            <Icon name="mail" size={16} /> {t("emailCta")}
-          </Button>
-          <div className="contact__deferred mono">{t("formDeferred")}</div>
+      <div className="contact__cards">
+        <Reveal
+          delay={80}
+          as="a"
+          className="contact-card contact-card--wa"
+          href={waLink(tWa("general"))}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="contact-card__icon">
+            <Icon name="whatsapp" size={26} />
+          </span>
+          <Eyebrow className="contact-card__label">WHATSAPP</Eyebrow>
+          <span className="contact-card__value">{WHATSAPP_DISPLAY}</span>
+          <span className="contact-card__cta">
+            {tCta("whatsapp")} <Icon name="chevron-right" size={16} />
+          </span>
         </Reveal>
 
-        <Reveal as="aside" delay={200} className="contact__direct">
-          <Eyebrow style={{ marginBottom: 16 }}>{t("direct")}</Eyebrow>
-          <ul className="contact__channels">
-            <li>
-              <Icon name="instagram" size={16} />
-              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-                {INSTAGRAM_HANDLE}
-              </a>
-            </li>
-            <li>
-              <Icon name="soundcloud" size={16} />
-              <a href={SOUNDCLOUD_URL} target="_blank" rel="noopener noreferrer">
-                soundcloud / danko
-              </a>
-            </li>
-            <li>
-              <Icon name="map-pin" size={16} />
-              <span>Bogotá, CO · world-touring</span>
-            </li>
-          </ul>
-          <div className="contact__rate mono">{t("rate")}</div>
+        <Reveal delay={160} as="a" className="contact-card" href={mailto("[Booking] Dankø")}>
+          <span className="contact-card__icon">
+            <Icon name="mail" size={24} />
+          </span>
+          <Eyebrow className="contact-card__label">EMAIL</Eyebrow>
+          <span className="contact-card__value contact-card__value--sm">{EMAIL}</span>
+          <span className="contact-card__cta">
+            {tCta("email")} <Icon name="chevron-right" size={16} />
+          </span>
+        </Reveal>
+
+        <Reveal
+          delay={240}
+          as="a"
+          className="contact-card"
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="contact-card__icon">
+            <Icon name="instagram" size={24} />
+          </span>
+          <Eyebrow className="contact-card__label">INSTAGRAM</Eyebrow>
+          <span className="contact-card__value">@{INSTAGRAM_USER}</span>
+          <span className="contact-card__cta">
+            {tCta("follow")} <Icon name="external" size={15} />
+          </span>
         </Reveal>
       </div>
     </section>
