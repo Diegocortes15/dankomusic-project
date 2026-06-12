@@ -1023,14 +1023,21 @@ a.btn, a.btn:hover { text-decoration: none; }
   .show__day { font-size: 44px; line-height: 1; }
   .show__year { font-size: 10px; letter-spacing: 0.18em; margin-top: 2px; }
   /* Address chip stretches the full width of the show row on phones so the
-     venue address reads as a clear tap target rather than a half-row pill. */
-  .show__addr {
+     venue address reads as a clear tap target rather than a half-row pill.
+     Note: `align-self: stretch` is the load-bearing line — `<button>` flex
+     children don't always honour the parent's default cross-axis stretch
+     unless told explicitly, and `width: 100%` alone can be ignored by the
+     UA on inline-flex buttons in some browsers. */
+  .show__info > .show__addr {
     display: flex;
+    align-self: stretch;
+    align-items: center;
     width: 100%;
+    box-sizing: border-box;
     gap: 10px;
   }
   .show__addr-text {
-    flex: 1;
+    flex: 1 1 auto;
     min-width: 0;
     font-size: 12px;
     line-height: 1.4;
