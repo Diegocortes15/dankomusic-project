@@ -12,16 +12,15 @@ import { useEffect } from "react";
  */
 export function LoaderDismiss() {
   useEffect(() => {
-    const w = window as unknown as {
-      dankoHideLoader?: () => void;
-      __dankoStart?: number;
-    };
-    const start = w.__dankoStart ?? performance.now();
-    const wait = Math.max(0, 900 - (performance.now() - start));
-    const id = window.setTimeout(() => {
+    const w = window as unknown as { dankoHideLoader?: () => void };
+    // Dismiss on next frame so the loader briefly registers, then yields
+    // immediately to the hero LCP. The previous 900ms artificial dwell was
+    // delaying LCP by ~600ms on fast connections without buying anything
+    // the user actually needed to read.
+    const id = window.requestAnimationFrame(() => {
       w.dankoHideLoader?.();
-    }, wait);
-    return () => window.clearTimeout(id);
+    });
+    return () => window.cancelAnimationFrame(id);
   }, []);
 
   return null;

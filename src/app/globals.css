@@ -232,8 +232,13 @@ a.btn, a.btn:hover { text-decoration: none; }
 .dl-eq {
   position: relative; display: flex; align-items: flex-end; gap: 5px; height: 34px;
 }
+/* Each bar is at its full 34px height; the keyframe scales it down via
+   transform-origin: bottom. transform doesn't trigger layout, so the
+   13 micro CLS shifts Lighthouse caught on the previous height-based
+   keyframe are gone. */
 .dl-eq i {
-  width: 5px; background: var(--accent, #2f7bff); display: block;
+  width: 5px; height: 34px; background: var(--accent, #2f7bff); display: block;
+  transform-origin: bottom; transform: scaleY(0.21);
   box-shadow: 0 0 12px rgba(var(--accent-rgb, 47, 123, 255), 0.7);
   animation: dl-eq 1s ease-in-out infinite;
 }
@@ -244,7 +249,10 @@ a.btn, a.btn:hover { text-decoration: none; }
 .dl-eq i:nth-child(5) { animation-delay: -0.1s; }
 .dl-eq i:nth-child(6) { animation-delay: -0.6s; }
 .dl-eq i:nth-child(7) { animation-delay: -0.4s; }
-@keyframes dl-eq { 0%, 100% { height: 7px; } 50% { height: 34px; } }
+@keyframes dl-eq {
+  0%, 100% { transform: scaleY(0.21); }
+  50% { transform: scaleY(1); }
+}
 .dl-meta {
   position: relative; display: flex; align-items: center; gap: 12px;
   font-family: "JetBrains Mono", monospace;
@@ -927,6 +935,15 @@ a.btn, a.btn:hover { text-decoration: none; }
   /* Slight desaturate + lift contrast so the SoundCloud whites read
      as a dim techno screen rather than a glowing rectangle. */
   filter: contrast(108%) saturate(90%) brightness(95%);
+}
+/* Sized exactly like the iframe it replaces so swapping in the real
+   widget produces zero CLS. */
+.sc-deck__placeholder {
+  display: block; width: 100%; height: 420px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18));
+}
+@media (max-width: 760px) {
+  .sc-deck__placeholder { height: 340px; }
 }
 
 .soundcloud__cta-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 28px; }

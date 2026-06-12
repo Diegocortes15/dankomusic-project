@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionStarter } from "@/components/ui/SectionStarter";
@@ -32,6 +33,37 @@ export function SoundCloud() {
   // SoundCloud accepts an URL-encoded hex prefixed with `#` (encoded as `%23`).
   const embedUrl = buildEmbedUrl(theme.swatch);
 
+  // Defer mounting the iframe until the section scrolls into view. The
+  // SoundCloud widget JS is ~300ms of main-thread work on cold load; that's
+  // a third of our TBT budget. Lighthouse never reaches this section, so it
+  // never pays that cost; real users pay only when they actually scroll.
+  const screenRef = useRef<HTMLDivElement | null>(null);
+  // Lazy init: on the server we always render the placeholder; on a client
+  // without IntersectionObserver we fall straight through to the real iframe.
+  const [mounted, setMounted] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return typeof IntersectionObserver === "undefined";
+  });
+  useEffect(() => {
+    if (mounted) return;
+    const node = screenRef.current;
+    if (!node) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setMounted(true);
+            io.disconnect();
+            return;
+          }
+        }
+      },
+      { rootMargin: "400px 0px" },
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, [mounted]);
+
   return (
     <section id="music" className="section section--accent soundcloud">
       <div className="soundcloud__halo" />
@@ -53,16 +85,21 @@ export function SoundCloud() {
             <i />
           </div>
         </div>
-        <div className="sc-deck__screen">
+        <div className="sc-deck__screen" ref={screenRef}>
           {/* Re-key on theme so the iframe reloads with the new colour
-              params when the user swaps palettes. */}
-          <iframe
-            key={themeId}
-            title="Dankø on SoundCloud"
-            src={embedUrl}
-            allow="autoplay"
-            loading="lazy"
-          />
+              params when the user swaps palettes. The IO above gates the
+              first mount so Lighthouse/cold loads don't pay the widget cost. */}
+          {mounted ? (
+            <iframe
+              key={themeId}
+              title="Dankø on SoundCloud"
+              src={embedUrl}
+              allow="autoplay"
+              loading="lazy"
+            />
+          ) : (
+            <div className="sc-deck__placeholder" aria-hidden="true" />
+          )}
         </div>
       </Reveal>
 
