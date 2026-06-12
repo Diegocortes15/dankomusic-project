@@ -3,45 +3,19 @@
 import { useEffect, useState, type CSSProperties } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Icon } from "@/components/ui/Icon";
-import {
-  DEFAULT_THEME,
-  THEMES,
-  THEME_STORAGE_KEY,
-  isThemeId,
-  type ThemeId,
-} from "@/config/themes";
-
-function readInitialTheme(): ThemeId {
-  // Server: return the default. Client: read whatever <html data-theme> was
-  // pre-set by the inline head script (see [locale]/layout.tsx).
-  if (typeof document === "undefined") return DEFAULT_THEME;
-  const attr = document.documentElement.getAttribute("data-theme");
-  return isThemeId(attr) ? attr : DEFAULT_THEME;
-}
-
-/** Custom event broadcast on every theme change so other components
- * (e.g. the SoundCloud embed) can react and recolour live. */
-export const THEME_CHANGE_EVENT = "danko-theme-change";
-
-function applyTheme(id: ThemeId): void {
-  document.documentElement.setAttribute("data-theme", id);
-  try {
-    window.localStorage.setItem(THEME_STORAGE_KEY, id);
-  } catch {
-    /* storage unavailable — silently no-op */
-  }
-  window.dispatchEvent(new CustomEvent(THEME_CHANGE_EVENT, { detail: { id } }));
-}
+import { THEMES, type ThemeId } from "@/config/themes";
+import { applyTheme, useActiveThemeId } from "@/lib/theme-state";
 
 /**
  * 6-theme accent switcher. Persists choice to localStorage. The HTML head
  * runs an inline script (see locale layout) to apply the saved theme before
- * first paint to avoid an accent flash.
+ * first paint to avoid an accent flash. State lives in `@/lib/theme-state`
+ * so SSR/client snapshots stay in sync via `useSyncExternalStore`.
  */
 export function ThemeSwitcher() {
   const t = useTranslations("nav");
   const locale = useLocale();
-  const [active, setActive] = useState<ThemeId>(readInitialTheme);
+  const active = useActiveThemeId();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -55,11 +29,8 @@ export function ThemeSwitcher() {
     return () => window.removeEventListener("click", onClick);
   }, [open]);
 
-  const choose = (id: ThemeId) => {
-    setActive(id);
-    applyTheme(id);
-  };
-  const activeTheme = THEMES.find((t) => t.id === active) ?? THEMES[0]!;
+  const choose = (id: ThemeId) => applyTheme(id);
+  const activeTheme = THEMES.find((entry) => entry.id === active) ?? THEMES[0]!;
   const isEnglish = locale === "en";
 
   return (

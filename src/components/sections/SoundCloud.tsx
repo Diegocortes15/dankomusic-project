@@ -1,37 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionStarter } from "@/components/ui/SectionStarter";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { SOUNDCLOUD_URL, SOUNDCLOUD_HANDLE } from "@/config/site";
-import { THEMES, DEFAULT_THEME, isThemeId, type ThemeId } from "@/config/themes";
-import { THEME_CHANGE_EVENT } from "@/components/nav/ThemeSwitcher";
-
-function readInitialThemeId(): ThemeId {
-  if (typeof document === "undefined") return DEFAULT_THEME;
-  const attr = document.documentElement.getAttribute("data-theme");
-  return isThemeId(attr) ? attr : DEFAULT_THEME;
-}
-
-/** Tracks the active theme and recomputes on every `danko-theme-change`. */
-function useActiveThemeId(): ThemeId {
-  const [id, setId] = useState<ThemeId>(readInitialThemeId);
-
-  useEffect(() => {
-    const onChange = (e: Event) => {
-      const detail = (e as CustomEvent<{ id: ThemeId }>).detail;
-      if (detail?.id) setId(detail.id);
-    };
-    window.addEventListener(THEME_CHANGE_EVENT, onChange as EventListener);
-    return () =>
-      window.removeEventListener(THEME_CHANGE_EVENT, onChange as EventListener);
-  }, []);
-
-  return id;
-}
+import { THEMES } from "@/config/themes";
+import { useActiveThemeId } from "@/lib/theme-state";
 
 function buildEmbedUrl(hexColor: string): string {
   const params = new URLSearchParams({
