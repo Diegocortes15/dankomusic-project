@@ -86,7 +86,11 @@ window.dankoHideLoader = function(){
   if (l) {
     requestAnimationFrame(function(){
       l.classList.add('is-done');
-      setTimeout(function(){ l.remove(); }, 700);
+      // Do NOT physically remove the node — it is rendered as JSX by the
+      // locale layout, so React keeps it in its virtual DOM. Removing it
+      // here would desync the trees and cause a NotFoundError on the next
+      // soft navigation (e.g. ES→EN locale switch). The .is-done class
+      // handles visual hiding (visibility:hidden + pointer-events:none).
     });
   }
 };
