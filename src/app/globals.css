@@ -532,7 +532,11 @@ a.btn, a.btn:hover { text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   .hero__event::after { animation: none; opacity: 0.6; }
 }
-.hero__event-badge { font-size: 9px; letter-spacing: 0.2em; color: var(--accent); border: 1px solid var(--accent); padding: 3px 7px; }
+.hero__event-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: 0.22em;
+  color: var(--accent); padding: 3px 8px; border: 1px solid var(--accent); text-transform: uppercase;
+}
 .hero__event-date { color: #fff; font-size: 13px; letter-spacing: 0.1em; }
 .hero__event-sep { color: var(--ink-500); }
 .hero__event-venue { font-family: var(--font-heading), Inter, sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-800); }

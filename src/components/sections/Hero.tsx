@@ -101,7 +101,10 @@ export function Hero() {
               smoothJump("shows");
             }}
           >
-            <span className="hero__event-badge mono">{tEvent("next")}</span>
+            <span className="hero__event-badge mono">
+              <span className="pulse-dot" />
+              {tEvent("next")}
+            </span>
             <span className="hero__event-date mono">{featuredDateLabel}</span>
             <span className="hero__event-sep">·</span>
             <span className="hero__event-venue">{featuredVenue.name.toUpperCase()}</span>
