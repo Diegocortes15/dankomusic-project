@@ -35,7 +35,6 @@ function ShowRow({
   isNext: boolean;
   status: "upcoming" | "completed";
 }) {
-  const t = useTranslations("shows");
   const tEvent = useTranslations("event");
   const tCta = useTranslations("cta");
   const tVenue = useTranslations("venue");
@@ -47,7 +46,6 @@ function ShowRow({
   const venueLabel = venue.name;
   const ticketMsg = event.featured ? tWa("ticketsFeatured") : tWa("general");
   const desc = locale === "en" ? event.descEn : event.descEs;
-  void t;
 
   return (
     <Reveal className={`show ${isNext ? "show--next" : ""} show--${status}`}>

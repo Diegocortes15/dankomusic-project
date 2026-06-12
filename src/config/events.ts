@@ -1,6 +1,6 @@
 import type { VenueId } from "./venues";
 
-export type EventStatus = "upcoming" | "completed";
+type EventStatus = "upcoming" | "completed";
 
 export type DankoEvent = {
   id: string;
